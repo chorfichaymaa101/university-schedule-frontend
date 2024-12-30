@@ -1,0 +1,10 @@
+
+.sidebar-menu a span {
+    font-size: 14px; 
+  }
+  
+ 
+  .sidebar-menu a span.active {
+    font-size: 18px; 
+  }
+  
