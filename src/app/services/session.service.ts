@@ -13,7 +13,7 @@ import {environment} from "../../environments/environment";
 })
 export class SessionService {
 
-  private api = 'http://localhost:8088';
+  private api = 'http://localhost:8084/';
   constructor(private httpClient: HttpClient) { }
 
 
