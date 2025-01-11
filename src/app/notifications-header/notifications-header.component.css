@@ -1,0 +1,18 @@
+.notification-count {
+    display: inline-block;
+    position: relative;
+  }
+  
+  .notification-count .circle {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: #ff4d4d; /* Light red */
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 50%;
+  }
+  

@@ -1,0 +1,108 @@
+.notifications-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: linear-gradient(180deg, #ffffff, #e1e1e1, #8fb7d1, #0466bd, #2d70a4, #0466bd, #8fb7d1, #e1e1e1, #ffffff);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.notifications-container h2 {
+    text-align: center;
+    font-size: 26px;
+    font-family: "Poppins", sans-serif;
+    color: #2d70a4; /* Changed to your requested color */
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.notifications-container h2::after {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background: #2d70a4; /* Changed to your requested color */
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+.notification-card {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border-left: 5px solid transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.notification-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-approved {
+    border-color: #70c7b7;
+}
+
+.card-pending {
+    border-color: #f1c15b;
+}
+
+.card-refused {
+    border-color: #e65f6d;
+}
+
+.notification-icon {
+    flex: 0 0 50px;
+    margin-right: 15px;
+}
+
+.notification-main {
+    color:#5c6784;
+    flex: 1;
+}
+.strong {
+    color:#2d70a4;
+}
+strong{
+    color:#5c6784;
+}
+.notification-title {
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #2d70a4;
+    margin-bottom: 10px;
+}
+
+.notification-details p,
+.notification-timing,
+.notification-class {
+    font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    color: #5c6784;
+    line-height: 1.5;
+}
+
+.notification-timing {
+    font-style: italic;
+    color: #8e9bb5;
+}
+
+.notification-status {
+    flex: 0 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.status-icon {
+    width: 40px;
+    height: 40px;
+    display: block;
+}

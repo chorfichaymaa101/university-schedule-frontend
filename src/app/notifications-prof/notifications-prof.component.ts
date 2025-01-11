@@ -1,0 +1,76 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';  
+
+@Component({
+  selector: 'app-notifications-prof',
+  standalone: true,
+  imports: [HttpClientModule, CommonModule],  
+  templateUrl: './notifications-prof.component.html',
+  styleUrls: ['./notifications-prof.component.css'],
+})
+
+export class NotificationsProfComponent implements OnInit {
+  requests: any[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  async ngOnInit() {
+    await this.fetchNotifications();
+  }
+
+  translateDay(day: string): string {
+    const daysInFrench: { [key: string]: string } = {
+      Monday: "Lundi",
+      Tuesday: "Mardi",
+      Wednesday: "Mercredi",
+      Thursday: "Jeudi",
+      Friday: "Vendredi",
+      Saturday: "Samedi",
+      Sunday: "Dimanche",
+    };
+    return daysInFrench[day] || day;
+  }
+  
+  getStatusIcon(status: string): string {
+    return {
+      Approved: "icon-approved",
+      Pending: "icon-pending",
+      Refused: "icon-refused",
+    }[status] || "icon-default";
+  }
+
+  getHeaderIcon(oldDay: string): string {
+    return oldDay ? "fa fa-calendar-alt header-icon" : "fa fa-clock header-icon";
+  }
+  
+  getCardClass(status: string): string {
+    return {
+      Approved: "card-approved",
+      Pending: "card-pending",
+      Refused: "card-refused",
+    }[status] || "card-default";
+  }
+  translateStatus(status: string): string {
+    return {
+      Approved: "Approuvé",
+      Pending: "En attente",
+      Refused: "Refusé",
+    }[status] || "Inconnu";
+  }
+    
+  async fetchNotifications() {
+    const professorId = 2; 
+    const apiUrl = `http://localhost:1000/api/requests/professor/${professorId}`;
+
+    this.http.get<any[]>(apiUrl).subscribe({
+      next: (data) => {
+        this.requests = data;
+      },
+      error: (err) => {
+        console.error('Error fetching notifications:', err);
+      },
+    });
+  }
+}

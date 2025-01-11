@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    padding-top: 30px;
+    font-family: "poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content at the top to allow natural scrolling */
+    min-height: 100vh; /* Ensure the body is at least as tall as the viewport */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.form-container {
+    background: linear-gradient(180deg, #ffffff, #e1e1e1, #8fb7d1, #0466bd, #2d70a4, #0466bd, #8fb7d1, #e1e1e1, #ffffff);
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    margin-top: 70px;
+    margin-bottom:40px;
+
+}
+  
+.form-container h2 {
+    font-size: 21px;
+    text-align: center;
+    color: #084981;
+    margin-bottom: 20px;
+    font-family: "poppins", sans-serif;
+}
+
+.form-container div {
+    margin-bottom: 15px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333333;
+    margin-left:5px;
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-container button {
+    background-color: #0466bd;
+    color: #ffffff;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Center the header horizontally */
+    margin-bottom: 20px;
+}
+
+.form-header h2 {
+    margin-right: 10px; /* Adds spacing between the heading and the icon */
+    color: #084981;
+    font-size: 21px;
+    font-family: "Poppins", sans-serif;
+}
+
+.header-icon {
+    width: 30px; /* Adjust icon size */
+    height: 30px;
+    margin-bottom:20px;
+}
+.info-container,
+.details-container {
+  margin-bottom: 20px; /* Adds spacing between the containers */
+  padding: 10px;
+  background: #f9f9f9; /* Light background for better visual separation */
+  border: 1px solid #f9f9f9;
+  border-radius: 5px;
+}
+
+.info-container div,
+.details-container div {
+  margin-bottom: 15px;
+}
+
+.info-container {
+  background-color: #f9f9f9; /* Light blue background for distinction */
+}
+
+.details-container {
+  background-color: #f9f9f9; /* Neutral background for distinction */
+}
+
+button {
+  margin-top: 20px; /* Adds spacing before the button */
+}
+
+.info-container h3,
+.details-container h3 {
+    color: #084981;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: "Poppins", sans-serif; 
+  }

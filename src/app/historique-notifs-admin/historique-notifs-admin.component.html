@@ -1,0 +1,47 @@
+<div class="notifications-container">
+  <h2>Historique des Notifications</h2>
+  <ul>
+    <ng-container *ngFor="let request of requests">
+      <li *ngIf="request.status !== 'Pending'">
+        <!-- Check if the request is for a session change or make-up session -->
+        <ng-container *ngIf="request.old_day; else noOldDay">
+          <!-- Changement de seance d'emplois -->
+          <div class="notification-card">
+            <div class="notification-main">
+              <p><strong class="strong">Demande de Changement d'une Seance d'Emplois</strong></p>
+              <p class="notification-details">
+              <p>
+                La demande d'un changement de séance définitif du professeur <strong>{{ request.professor_name }}</strong> du module <strong>{{ request.module_name }}</strong> de la filière <strong>{{ request.program_name }}</strong>, prévu à <strong>{{ request.old_time }}</strong> le <strong>{{ translateDay(request.old_day) }}</strong> dans la salle <strong>{{ request.class_name }}</strong> a été 
+                <strong>{{ request.status === 'Approved' ? 'acceptée' : 'refusée' }}</strong>.
+                <span *ngIf="request.status === 'Approved'"> La séance a été changée en <strong>{{ request.new_time }}</strong> le <strong>{{ translateDay(request.new_day) }}</strong> dans la salle <strong>{{ request.new_class_name }}</strong>.</span>
+                <span *ngIf="request.status === 'Refused'"> La séance actuelle du professeur est programmé le <strong>{{ translateDay(request.old_day) }}</strong> à <strong>{{ request.old_time }}</strong>, à la salle <strong>{{ request.class_name }}</strong>.</span>
+              </p>
+              
+            </div>
+            <div class="notification-status">
+              <img src="assets/img/icons/{{request.status.toLowerCase()}}.png" alt="{{request.status}} Icon" class="status-icon">
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Seance de Rattrapage -->
+        <ng-template #noOldDay>
+          <div class="notification-card">
+            <div class="notification-main">
+              <p><strong class="strong">Demande de Seance de Rattrapage</strong></p>
+              <p class="notification-details">
+                <p>
+                La demande d'une séance de rattrapage du professeur <strong>{{ request.professor_name }}</strong> pour le module <strong>{{ request.module_name }}</strong> de la filière <strong>{{ request.program_name }}</strong> prévue pour le <strong>{{ request.day | date: 'dd-MM-YYYY' }}</strong> à <strong>{{ request.time }}</strong> a été 
+                <strong>{{ request.status === 'Approved' ? 'acceptée' : 'refusée' }}</strong>.
+                <span *ngIf="request.status === 'Approved'">Cette séance a eu lieu dans la salle <strong>{{ request.class_name }}</strong>.</span>
+              </p>
+            </div>
+            <div class="notification-status">
+              <img src="assets/img/icons/{{request.status.toLowerCase()}}.png" alt="{{request.status}} Icon" class="status-icon">
+            </div>
+          </div>
+        </ng-template>
+      </li>
+    </ng-container>
+  </ul>
+</div>

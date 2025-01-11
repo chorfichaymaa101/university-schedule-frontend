@@ -1,0 +1,123 @@
+/* Container styles */
+.notifications-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: linear-gradient(180deg, #ffffff, #d3d3d3, #0466bd, #2d70a4, #0466bd, #d3d3d3, #ffffff); /* Replaced purple with a blue shade */
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+/* Header Styles - Center the container title */
+.notifications-container h2 {
+    text-align: center;
+    font-size: 26px;
+    font-family: "Poppins", sans-serif;
+    color: #2d70a4; /* White color for contrast against the gradient */
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* Horizontal line under the header */
+.notifications-container h2::after {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background: #2d70a4; /* White color for the line */
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+/* List Style */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Title inside individual notifications - Smaller size */
+h4 {
+    color: #2d70a4;
+    font-size: 16px; /* Smaller title size */
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Paragraph inside notifications */
+.notification-details {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* Add some spacing for strong elements */
+.notification-details strong {
+    font-weight: 700;
+    color: #5c6784;
+}
+
+/* Style the icons */
+.notifications-container h4 i {
+    margin-right: 10px;
+    color: #2d70a4; /* Icon color, same as notification title */
+    font-size: 18px; /* Adjust icon size */
+}
+
+/* No notifications message */
+div.no-notifications {
+    font-size: 18px;
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}
+
+/* Add some margin to the bottom of notifications */
+.notification-details {
+    margin-bottom: 0;
+}
+
+/* Action buttons (e.g., for marking as read) */
+.notification-action {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.notification-action button {
+    padding: 8px 15px;
+    background-color: #2d70a4;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notification-action button:hover {
+    background-color: #3a76c4;
+}
+
+/* Add some space between the notification and the bottom */
+li:last-child {
+    margin-bottom: 0;
+}

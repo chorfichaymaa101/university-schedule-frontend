@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="demanderRattrapage.component.css">
+  <title>Demander Rattrapage</title>
+</head>
+<body>
+  <form #requestForm="ngForm" (ngSubmit)="onSubmit(requestForm)" class="form-container">
+    <div class="form-header">
+      <h2>Demander Rattrapage</h2>
+      <img src="/assets/img/icons/calendrier.png" alt="Icon" class="header-icon" />
+    </div>
+  
+    <!-- Container for Filière, Semestre, Module -->
+    <div class="info-container">
+      <h3>Informations sur le Cours</h3>
+      <div>
+        <label for="module">Module</label>
+        <select id="module" name="moduleId" ngModel required>
+          <option value="" disabled selected>Choisir un Module</option>
+          <option *ngFor="let module of modules" [value]="module.id">
+            {{ module.moduleName }}
+          </option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="program">Filière</label>
+        <select id="program" name="programId" ngModel required>
+          <option value="" disabled selected>Choisir une Filière</option>
+          <option *ngFor="let program of programs" [value]="program.id">
+            {{ program.programName }}
+          </option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="semester">Semestre</label>
+        <select id="semester" name="semesterId" ngModel required>
+          <option value="" disabled selected>Choisir un Semestre</option>
+          <option *ngFor="let semester of semesters" [value]="semester.semesterId">
+            Semestre {{ semester.semesterId }}
+          </option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Container for Other Information -->
+    <div class="details-container">
+      <h3>Détails de la séance</h3>
+      <div>
+        <label for="professorId">Professor ID</label>
+        <input id="professorId" name="professorId" type="number" ngModel required />
+      </div>
+  
+      <div>
+        <label for="time">Debut de Séance</label>
+        <input id="time" name="time" type="time" ngModel required />
+      </div>
+  
+      <div>
+        <label for="endTime">Fin de Séance</label>
+        <input id="endTime" name="endTime" type="time" ngModel required />
+      </div>
+  
+      <div>
+        <label for="day">Date de Séance</label>
+        <input id="day" name="day" type="date" ngModel required />
+      </div>
+    </div>
+  
+    <button type="submit">Valider</button>
+  </form>
+  
+</body>
+</html>

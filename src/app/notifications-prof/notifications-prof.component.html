@@ -1,0 +1,49 @@
+<div class="notifications-container">
+  <h2>Notifications</h2>
+  <div
+    class="notification-card"
+    *ngFor="let request of requests"
+    [class]="getCardClass(request.status)"
+  >
+    <div class="notification-icon">
+      <i class="fa" [class]="getHeaderIcon(request.old_day)"></i>
+    </div>
+    <div class="notification-main">
+      <ng-container *ngIf="request.old_day; else noOldDay">
+        <p class="notification-title">Changement de séance</p>
+        <p class="notification-details">
+          Le module <strong>{{ request.module_name }}</strong>, dans le programme 
+          <strong>{{ request.program_name }}</strong>, semestre 
+          <strong>S{{ request.semester_name }}</strong>, a été reprogrammé de 
+          <strong>{{ translateDay(request.old_day) }}</strong>, 
+          <strong>{{ request.old_time }}</strong> à 
+          <strong>{{ translateDay(request.new_day) }}</strong>, 
+          <strong>{{ request.new_time }}</strong>. L'ancienne salle 
+          <strong>{{ request.class_name }}</strong> est maintenant remplacée par la salle 
+          <strong>{{ request.new_class_name }}</strong>.
+        </p>
+      </ng-container>
+
+      <ng-template #noOldDay>
+        <p class="notification-title">Nouvelle séance de rattrapage</p>
+        <p class="notification-details">
+          Une nouvelle séance pour le module <strong>{{ request.module_name }}</strong>, dans le programme 
+          <strong>{{ request.program_name }}</strong>, semestre 
+          <strong>S{{ request.semester_name }}</strong>, est prévue pour le 
+          <strong>{{ request.day | date: 'dd-MM-YYYY' }}</strong> à 
+          <strong>{{ request.time }}</strong>
+          <ng-container *ngIf="request.status !== 'Refused' && request.status !== 'Pending';">
+            dans la salle <strong>{{ request.class_name }}</strong>.
+          </ng-container>
+        </p>
+      </ng-template>
+    </div>
+    <div class="notification-status">
+      <img
+        [src]="'assets/img/icons/' + request.status.toLowerCase() + '.png'"
+        alt="{{ request.status }}"
+        class="status-icon"
+      />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,336 @@
+
+/* Notifications Container */
+.notifications-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(180deg, #ffffff, #e1e1e1, #8fb7d1, #0466bd, #2d70a4, #0466bd, #8fb7d1, #e1e1e1, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Heading Style */
+.notifications-container h2 {
+  text-align: center;
+  font-size: 26px;
+  font-family: "Poppins", sans-serif;
+  color: #2d70a4;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.notifications-container h2::after {
+  content: "";
+  width: 50px;
+  height: 3px;
+  background: #2d70a4;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 3px;
+}
+
+/* Notification Card */
+.notification-card {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border-left: 5px solid transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.notification-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-approved {
+  border-color: transparent;
+}
+
+.card-pending {
+  border-color: transparent;
+}
+
+.card-refused {
+  border-color: transparent;
+}
+
+/* Notification Icon */
+.notification-icon {
+  flex: 0 0 50px;
+  font-size: 40px;
+  color: #2d70a4;
+  margin-right: 15px;
+}
+
+/* Main Notification Content */
+.notification-main {
+  flex: 1;
+}
+
+.notification-title {
+  font-size: 15px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #2d70a4;
+  margin-bottom: 10px;
+}
+
+.notification-details,
+.notification-timing,
+.notification-class {
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  color: #5c6784;
+  line-height: 1.5;
+}
+
+.notification-timing {
+  font-style: italic;
+  color: #8e9bb5;
+}
+
+/* Notification Status */
+.notification-status {
+  flex: 0 0 100px;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+.notification-status i {
+  font-size: 30px;
+  margin-bottom: 5px;
+  display: block;
+  color: #2d70a4;
+}
+
+.status-text {
+  font-weight: 600;
+  background: linear-gradient(135deg, #70c7b7, #5fbd99);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.card-pending .status-text {
+  background: linear-gradient(135deg, #f1c15b, #f0a500);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.card-refused .status-text {
+  background: linear-gradient(135deg, #e65f6d, #d1495b);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Notification Status Flexbox Layout */
+.notification-status {
+  flex: 0 0 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+  position: relative;
+}
+
+/* Status Icon Style */
+.status-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out; /* Fade-in animation */
+}
+
+/* Modal Content */
+.modal-content, .modal-contentt {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 700px;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.3s ease;
+  animation: slideUp 0.5s ease-out;
+}
+
+.modal-content:hover,  
+  .modal-contentt:hover{
+  transform: translateY(-10px); /* Slight lift effect on hover */
+}
+
+.modal-content h3,
+.modal-contentt h3 {
+  font-family: 'Poppins', sans-serif;
+  color: black; /* Black color for the title */
+  font-size: 17px;
+  margin-bottom: 20px;
+}
+
+/* Modal Buttons Container */
+.modal-buttons {
+  display: flex;
+  justify-content: center; /* Center buttons in the container */
+  width: 100%;
+  gap: 20px; /* Adds space between buttons */
+}
+
+/* Button Styles */
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 25%; /* Buttons take up 25% of the width, leaving space between */
+  margin-right: 20px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+.classId{
+  margin-right:5px;
+}
+/* Accept Button */
+.accept-btn,
+.submit {
+  background-color: #2d7cb8;  /* Blue color */
+  border: none;
+  color: white;
+  margin-left:20px;
+}
+.accept-btn{
+  margin-left: 100px;
+}
+
+.accept-btn:hover,
+.submit:hover {
+  background-color: #2d70a4;  /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+/* Refuse Button */
+.refuse-btn,
+.cancel {
+  background-color: white;
+  border: 2px solid #2d7cb8;  /* Blue border */
+  color: #0466bd;  /* Blue text */
+}
+
+.refuse-btn:hover,
+.cancel:hover {
+  background-color: #2d7cb8;  /* Blue background on hover */
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Modal Close Button */
+.modal-close-btn {
+  background-color: #e65f6d;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.modal-close-btn:hover {
+  background-color: #d1495b; /* Darker shade for close button */
+  transform: scale(1.1);
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+
+
+
+/* Modal Buttons Container */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between; /* Align buttons on the same line with space in between */
+  width: 100%;
+  gap: 20px; /* Adds space between buttons */
+}
+
+/* Accept Button - "Accepter" */
+.accepter {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #2d7cb8; /* Blue color */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 48%;
+}
+
+.accepter:hover {
+  background-color: #2d70a4; /* Darker blue on hover */
+  transform: scale(1.05);
+}
+
+/* Refuse Button - "Refuser" */
+.refuser {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: white;
+  border: 2px solid #2d7cb8; /* Blue border */
+  color: #0466bd; /* Blue text */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 48%;
+}
+
+.refuser:hover {
+  background-color: #2d7cb8; /* Blue background on hover */
+  color: white;
+  transform: scale(1.05);
+}

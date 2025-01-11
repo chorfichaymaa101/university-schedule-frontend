@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="prof-modifier-seance.component.css">
+  <title>Changer Séance</title>
+</head>
+<body>
+  
+  <form #requestForm="ngForm" (ngSubmit)="onSubmit(requestForm)" class="form-container">
+    <div class="form-header">
+      <h2>Changer Séance</h2>
+      <img src="/assets/img/icons/calendrier.png" alt="Icon" class="header-icon" />
+    </div>
+
+    <div class="form-group-container">
+      <div>
+        <label for="professorId">Professor ID</label>
+        <input id="professorId" name="professorId" type="number" ngModel required />
+      </div>
+    </div>
+
+    <!-- Semester, Filière, and Module Section -->
+    <div class="section-container">
+      <div class="section-header">
+        <h3>Informations sur le Cours</h3>
+      </div>
+      <div class="form-group-container">
+        <div>
+          <label for="module">Module</label>
+          <select id="module" name="moduleId" ngModel required>
+            <option value="" disabled selected>Choisir un Module</option>
+            <option *ngFor="let module of modules" [value]="module.id">
+              {{ module.moduleName }}
+            </option>
+          </select>
+        </div>
+        
+        <div>
+          <label for="program">Filière</label>
+          <select id="program" name="programId" ngModel required>
+            <option value="" disabled selected>Choisir une Filière</option>
+            <option *ngFor="let program of programs" [value]="program.id">
+              {{ program.programName }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label for="semester">Semestre</label>
+          <select id="semester" name="semesterId" ngModel required>
+            <option value="" disabled selected>Choisir un Semestre</option>
+            <option *ngFor="let semester of semesters" [value]="semester.semesterId">
+              Semestre {{ semester.semesterId }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Class and Day Section -->
+    <div class="section-container">
+      <div class="section-header">
+        <h3>Détails de l'ancienne séance</h3>
+      </div>
+      <div class="form-group-container">
+        <div>
+          <label for="oldClass">Ancienne Classe</label>
+          <select id="oldClass" name="oldClass" ngModel required>
+            <option value="" disabled selected>Choisir une Classe</option>
+            <option *ngFor="let class of classes" [value]="class.id">
+               {{ class.classname }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label for="oldDay">Ancien Jour</label>
+          <select id="oldDay" name="oldDay" ngModel required>
+            <option value="" disabled selected>Choisir un jour</option>
+            <option value="Monday">Lundi</option>
+            <option value="Tuesday">Mardi</option>
+            <option value="Wednesday">Mercredi</option>
+            <option value="Thursday">Jeudi</option>
+            <option value="Friday">Vendredi</option>
+            <option value="Saturday">Samedi</option>
+            <option value="Sunday">Dimanche</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Time Input Section -->
+      <div class="time-group">
+        <div>
+          <label for="oldTime">Début d'Ancienne Séance</label>
+          <input id="oldTime" name="oldTime" type="time" ngModel required />
+        </div>
+        <div>
+          <label for="endOldTime">Fin d'Ancienne Séance</label>
+          <input id="endOldTime" name="endOldTime" type="time" ngModel required />
+        </div>
+      </div>
+    </div>
+
+    <!-- New Class and Day Section -->
+    <div class="section-container">
+      <div class="section-header">
+        <h3>Détails de la nouvelle séance</h3>
+      </div>
+      <div class="form-group-container">
+        <div>
+          <label for="newClass">Nouvelle Classe</label>
+          <select id="newClass" name="newClass" ngModel required>
+            <option value="" disabled selected>Choisir une Classe</option>
+            <option *ngFor="let class of classes" [value]="class.id">
+               {{ class.classname }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <label for="newDay">Nouveau Jour</label>
+          <select id="newDay" name="newDay" ngModel required>
+            <option value="" disabled selected>Choisir un jour</option>
+            <option value="Monday">Lundi</option>
+            <option value="Tuesday">Mardi</option>
+            <option value="Wednesday">Mercredi</option>
+            <option value="Thursday">Jeudi</option>
+            <option value="Friday">Vendredi</option>
+            <option value="Saturday">Samedi</option>
+            <option value="Sunday">Dimanche</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- New Time Input Section -->
+      <div class="time-group">
+        <div>
+          <label for="newTime">Début de Nouvelle Séance</label>
+          <input id="newTime" name="newTime" type="time" ngModel required />
+        </div>
+        <div>
+          <label for="endNewTime">Fin de Nouvelle Séance</label>
+          <input id="endNewTime" name="endNewTime" type="time" ngModel required />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Valider</button>
+  </form>
+
+</body>
+</html>
+
+
+  <!--
+     <div>
+      <label for="status">Status</label>
+      <input id="status" name="status" type="text" ngModel />
+    </div>
+    <div>
+      <label for="sessionClassId">Session Class ID</label>
+      <input id="sessionClassId" name="sessionClassId" type="number" ngModel />
+    </div>
+    <div>
+      <label for="creationDate">Creation Date</label>
+      <input id="creationDate" name="creationDate" type="date" ngModel required />
+    </div>
+  -->

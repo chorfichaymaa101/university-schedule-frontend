@@ -1,0 +1,38 @@
+<div class="notifications-container">
+  <h2>Notifications</h2>
+  <ul>
+    <ng-container *ngFor="let request of requests">
+      <li *ngIf="request.status === 'Approved'" class="notification-item">
+        <ng-container *ngIf="request.old_day; else noDay">
+          <div class="notification-header">
+            <h4>
+              <i class="fa fa-calendar-alt" aria-hidden="true"></i> <!-- Calendar icon -->
+              Rappel de Changement d'une Séance d'Emplois (Définitif)
+            </h4>
+          </div>
+          <p class="notification-details">
+            La séance prévue avec le professeur <strong>{{ request.professor_name }}</strong> pour le module 
+            <strong>{{ request.module_name }}</strong> a été déplacée. Elle est désormais fixée au 
+            <strong>{{ translateDay(request.new_day) }}</strong> à <strong>{{ request.new_time }}</strong> dans la classe 
+            <strong>{{ request.new_class_name }}</strong>, alors qu'elle était initialement programmée le 
+            <strong>{{ translateDay(request.old_day) }}</strong> à <strong>{{ request.old_time }}</strong> dans la classe 
+            <strong>{{ request.class_name }}</strong>.
+          </p>
+        </ng-container>
+
+        <ng-template #noDay>
+          <div class="notification-header">
+            <h4>
+              <i class="fa fa-clock" aria-hidden="true"></i> <!-- Clock icon -->
+              Rappel d'une Séance de Rattrapage
+            </h4>
+          </div>
+          <p class="notification-details">
+            Une séance de rattrapage pour le module <strong>{{ request.module_name }}</strong> est prévue le <strong>{{ request.day | date: 'dd-MM-YYYY' }}</strong> à 
+            <strong>{{ request.time }}</strong> dans la classe <strong>{{ request.class_name }}</strong>.
+          </p>
+        </ng-template>
+      </li>
+    </ng-container>
+  </ul>
+</div>

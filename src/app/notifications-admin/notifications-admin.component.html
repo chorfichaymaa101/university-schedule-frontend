@@ -1,0 +1,77 @@
+<div class="notifications-container">
+  <h2>Notifications</h2>
+  <ng-container *ngFor="let request of requests">
+    <div *ngIf="request.status === 'Pending'" class="notification-card">
+      <div class="notification-icon">
+        <i class="fa fa-bell"></i>
+      </div>
+      <div class="notification-main">
+        <ng-container *ngIf="request.old_day; else noOldDay">
+          <p class="notification-title"><strong>Demande de Changement d'une Seance d'Emplois</strong></p>
+          <p class="notification-details">
+            <strong>Le professeur {{ request.professor_name }}</strong> a soumis une demande de changement d'horaire pour la séance de <strong>{{ request.module_name }}</strong> avec la filière <strong>{{ request.program_name }}</strong> du semestre <strong>S{{ request.semester_name }}</strong>.<br>
+            La séance actuelle est à <strong>{{ request.old_time }}</strong> dans la classe <strong>{{ request.class_name }}</strong> le <strong>{{ translateDay(request.old_day) }}</strong>.<br>
+            Le professeur souhaite modifier l'heure à <strong>{{ request.new_time }}</strong>, déplacer la séance au <strong>{{ translateDay(request.new_day) }}</strong> et changer la classe pour <strong>{{ request.new_class_name }}</strong>.<br>
+          </p>
+        </ng-container>
+
+        <ng-template #noOldDay>
+          <p class="notification-title"><strong>Demande de Séance de Rattrapage</strong></p>
+          <p class="notification-details">
+            Le professeur <strong>{{ request.professor_name }}</strong> a soumis une demande pour une séance de rattrapage du module <strong>{{ request.module_name }}</strong> avec la filière <strong>{{ request.program_name }}</strong> du semestre <strong>S{{ request.semester_name }}</strong>.<br>
+            La séance est demandée pour le <strong>{{ request.day | date: 'dd-MM-YYYY' }}</strong> à <strong>{{ request.time }}</strong>.<br>
+          </p>
+        </ng-template>
+
+        <div class="notification-actions">
+          <button (click)="openAcceptModal(request.requestId, request.classId)" class="accept-btn">Accepter</button>
+          <button (click)="openRefuseModal(request.requestId)" class="refuse-btn">Refuser</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Refuse Modal -->
+    <div class="modal" *ngIf="showRefuseModal && selectedRequestId === request.requestId">
+      <div class="modal-content">
+        <h3>Êtes-vous sûr de vouloir refuser cette demande ?</h3>
+        <div class="modal-buttons">
+          <button class="refuser" (click)="confirmRefuseRequest()">Oui, Refuser</button>
+          <button class="accepter" (click)="closeRefuseModal()">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accept Modal for "Changement de Séance d'Emplois" -->
+    <div class="modal" *ngIf="showAcceptModal && selectedRequestId === request.requestId && request.old_day">
+      <div class="modal-content">
+        <h3>Êtes-vous sûr de vouloir accepter cette demande ?</h3>
+        <div class="modal-buttons">
+          <button class="accepter" (click)="submitAcceptedRequest2()">Soumettre</button>
+          <button class="refuser" (click)="closeAcceptModal2()">Annuler</button>
+        </div>
+      </div>
+    </div>
+
+   <!-- Accept Modal for "Séance de Rattrapage" only -->
+<div class="modal" *ngIf="showAcceptModal && selectedRequestId === request.requestId && !request.old_day">
+  <div class="modal-contentt">
+    <h3>Choisir une classe pour cette séance</h3>
+    <div>
+      <label for="classId" class="classId">Classe</label>
+      <select id="classId" [(ngModel)]="selectedClassId" required>
+        <option value="" disabled selected>Choisir Classe</option>
+        
+        <option *ngFor="let class of classes" [value]="class.id">
+          {{ class.classname }}
+        </option>
+      </select>
+    </div>
+
+    <button class="submit" (click)="submitAcceptedRequest()">Soumettre</button>
+    <button class="cancel" (click)="closeAcceptModal()">Annuler</button>
+  </div>
+</div>
+
+  </ng-container>
+</div>
