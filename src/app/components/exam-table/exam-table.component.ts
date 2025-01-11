@@ -25,7 +25,7 @@ import { Person } from 'src/app/models/person.model';
 import { Module } from 'src/app/models//module.model';
 import { Class } from 'src/app/models//class.model';
 import { CommonModule } from '@angular/common';
-import { MatOptionModule } from '@angular/material/core'; 
+import { MatOptionModule } from '@angular/material/core';
 @Component({
   selector: 'app-exam-table',
   standalone: true,
@@ -45,7 +45,7 @@ import { MatOptionModule } from '@angular/material/core';
     MatSelectModule,
     CommonModule,
     MatOptionModule
-    
+
   ],
   templateUrl: './exam-table.component.html',
   styleUrls: ['./exam-table.component.css'],
@@ -63,14 +63,14 @@ export class ExamTableComponent {
   classes: Class[] = [];
 
   displayedColumns: string[] = ['prof', 'program', 'module', 'horaire', 'classe', 'day'];
-  
+
   firstFormGroup = this._formBuilder.group({
     year: ['', Validators.required],
     semester: ['', Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
-    
+
   });
 
   thirdFormGroup = this._formBuilder.group({
@@ -84,8 +84,8 @@ export class ExamTableComponent {
     capacity: ['', Validators.required]
   });
 
-  
-  
+
+
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -95,7 +95,7 @@ export class ExamTableComponent {
 
   ngOnInit(): void {
   // Charger les programmes depuis le service
- 
+
   this.firstFormGroup.get('semester')?.valueChanges.subscribe(semester => {
     if (semester) {
       this.sessionService.getProgramBySemester(semester).subscribe(data => {
@@ -103,9 +103,9 @@ export class ExamTableComponent {
       });
     }
   });
-  
 
-  
+
+
 
 // Observer les changements dans la sélection du programme
 this.thirdFormGroup.get('prog')?.valueChanges.subscribe(programId => {
@@ -122,6 +122,22 @@ this.thirdFormGroup.get('prog')?.valueChanges.subscribe(programId => {
     }
   }
 });
+
+    this.thirdFormGroup.get('heureDebut')?.valueChanges.subscribe(value => {
+      if (value) {
+        // Ensure time format doesn't include seconds
+        const timeWithoutSeconds = value.slice(0, 5);  // Only keep HH:mm part
+        this.thirdFormGroup.get('heureDebut')?.setValue(timeWithoutSeconds, { emitEvent: false });
+      }
+    });
+
+    this.thirdFormGroup.get('heureFin')?.valueChanges.subscribe(value => {
+      if (value) {
+        // Ensure time format doesn't include seconds
+        const timeWithoutSeconds = value.slice(0, 5);  // Only keep HH:mm part
+        this.thirdFormGroup.get('heureFin')?.setValue(timeWithoutSeconds, { emitEvent: false });
+      }
+    });
 
 // Observer les changements dans la capacité
 this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
@@ -146,13 +162,13 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
             semester: semester,
           }
           this.examTableService.saveexamTable(newExamTable).subscribe({
-           
+
            });
           this.idExamTable = newExamTable.id;
           this.sessionService.getSessionExamByExamCalendar(newExamTable.id).subscribe({
             next: (res: SessionExam[]) => {
               this.processSessionExams(res);
-            }, 
+            },
             error: (err: HttpErrorResponse) => {
               console.error('Erreur de récupération :', err);
             },
@@ -160,14 +176,14 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
 
         }
         else{
-          
-          this.examTableService.getExamTableBySemseterYear(semester, year).subscribe({ 
+
+          this.examTableService.getExamTableBySemseterYear(semester, year).subscribe({
             next: (examTable: ExamTable) => {
               this.idExamTable = examTable.id;
               this.sessionService.getSessionExamByExamCalendar(examTable.id).subscribe({
                 next: (res: SessionExam[]) => {
                   this.processSessionExams(res);
-                }, 
+                },
                 error: (err: HttpErrorResponse) => {
                   console.error('Erreur de récupération :', err);
                 },
@@ -177,7 +193,7 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
               console.error('Erreur de récupération :', err);
             },
           });
-          
+
         }
       },
       error: (err: HttpErrorResponse) => {
@@ -189,31 +205,31 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
   processSessionExams(sessionExams: SessionExamWithDetails[]): void {
     const processedData = sessionExams.map((sessionExam) => {
       const sessionExamWithDetails = { ...sessionExam }; // Copie des données initiales
-  
+
       // Récupération des détails
       this.sessionService.getProfById(sessionExam.professorId).subscribe({
         next: (prof) => (sessionExamWithDetails['professorName'] = prof.name),
         error: (err: HttpErrorResponse) => console.error('Erreur de récupération professeur :', err),
       });
-  
+
       this.sessionService.getProgramById(sessionExam.programId).subscribe({
         next: (program) => (sessionExamWithDetails['programName'] = program.programName),
         error: (err: HttpErrorResponse) => console.error('Erreur de récupération programme :', err),
       });
-  
+
       this.sessionService.getModuleById(sessionExam.moduleId).subscribe({
         next: (module) => (sessionExamWithDetails['moduleName'] = module.moduleName),
         error: (err: HttpErrorResponse) => console.error('Erreur de récupération module :', err),
       });
-  
+
       this.sessionService.getClasseById(sessionExam.classId).subscribe({
         next: (classe) => (sessionExamWithDetails['className'] = classe.classname),
         error: (err: HttpErrorResponse) => console.error('Erreur de récupération classe :', err),
       });
-  
+
       return sessionExamWithDetails;
     });
-  
+
 
     this.dataSource = processedData;
   }
@@ -221,16 +237,16 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
     const yearValue = this.firstFormGroup.get('year')?.value?.trim();
     const semesterValue = this.firstFormGroup.get('semester')?.value?.trim();
     if (yearValue && semesterValue) {
-      this.year = yearValue; 
+      this.year = yearValue;
       this.semester = semesterValue;
-      this.examTableByYearBySemester(semesterValue, yearValue); 
+      this.examTableByYearBySemester(semesterValue, yearValue);
       console.log('Les données sont bien récupéré');
     } else {
       console.log('Année invalide. Veuillez saisir une année valide.');
     }
   }
- 
- 
+
+
   addSessionExamRow(): void {
     const newRow: SessionExam = {
       id: 0,
@@ -245,7 +261,7 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
       examCalendarId: this.idExamTable,
       capacity: Number(this.thirdFormGroup.get('capacity')?.value),
     };
-  
+
     this.sessionService.saveexamTable(newRow).subscribe({
       next: (res: SessionExam) => {
         console.log('Nouvelle ligne ajoutée :', res);
@@ -262,7 +278,7 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
     const localDate = new Date(date);
     const utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
     return utcDate.toISOString().split('T')[0];
-    
+
   }
 
 }

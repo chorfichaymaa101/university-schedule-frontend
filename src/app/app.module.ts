@@ -29,7 +29,6 @@ import { ExamTableEditComponent } from './components/exam-table-edit/exam-table-
     //PageHeaderComponent,
 
     NotFoundComponent,
-    ExamTableEditComponent,
     //ModifySemesterComponent,
     //ModifyTimeTableComponent,
     //ModifyExamComponent,
@@ -45,6 +44,7 @@ import { ExamTableEditComponent } from './components/exam-table-edit/exam-table-
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SemesterTableEditComponent,
+    ExamTableEditComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { Program } from 'src/app/models/program.model';
 import {Module} from 'src/app/models/module.model';
 import {Class} from 'src/app/models/class.model';
 import {environment} from "../../environments/environment";
+import {SemesterTable} from "../models/semester-table.model";
 @Injectable({
   providedIn: 'root'
 })
@@ -18,11 +19,11 @@ export class SessionExamService {
     public saveexamTable(sessionExam: SessionExam): Observable<SessionExam> {
         return this.httpClient.post<SessionExam>(`${environment.backendHost}/sessionExam`, sessionExam);
     }
-      
+
     public getSessionExamByExamCalendar(examtableId: number ): Observable<SessionExam[]>{
         return this.httpClient.get<SessionExam[]>(`${environment.backendHost}/sessionExam/${examtableId}`)
       }
-    
+
     //prof
     public getProfById(profId: number ): Observable<Person>{
       return this.httpClient.get<Person>(`${environment.backendHost}/profById/${profId}`)
@@ -62,5 +63,8 @@ export class SessionExamService {
     public getClassByTypeCapacity(sessiontype: number, capacity: number): Observable<Class[]>{
       return this.httpClient.get<Class[]>(`${environment.backendHost}/class/${sessiontype}/${capacity}`)
     }
-  
+
+    public updateSessionExam(sessionExam: SessionExam): Observable<void> {
+      return this.httpClient.put<void>(`${environment.backendHost}/updateSessionExam`, sessionExam);
+    }
 }

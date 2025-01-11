@@ -8,6 +8,7 @@ import { SemesterTableComponent } from './components/semester-table/semester-tab
 import { ExamTableComponent } from './components/exam-table/exam-table.component';
 import { TimeTableComponent } from './components/time-table/time-table.component';
 import { SemesterTableEditComponent  } from './components/semester-table-edit/semester-table-edit.component';
+import {ExamTableEditComponent} from "./components/exam-table-edit/exam-table-edit.component";
 //import { ModifyTimeTableComponent } from './components/modify-exam/modify-exam.component';
 //import { ModifyExamComponent } from './components/modify-time-table/modify-time-table.component';
 
@@ -27,7 +28,7 @@ const routes: Routes = [
   },
   { path: 'semester-table-edit', component: SemesterTableEditComponent },
   //{ path: 'modify-time-table', component: ModifyTimeTableComponent },
-  //{ path: 'modify-exam', component: ModifyExamComponent },
+  { path: 'exam-table-edit', component: ExamTableEditComponent },
 
     // not-found
     { path :'**' , component: NotFoundComponent},
