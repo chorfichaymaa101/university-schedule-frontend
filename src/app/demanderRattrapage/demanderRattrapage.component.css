@@ -1,6 +1,5 @@
 body {
     margin: 0;
-    padding-top: 30px;
     font-family: "poppins", sans-serif;
     display: flex;
     justify-content: center;
@@ -11,11 +10,11 @@ body {
 }
 
 .form-container {
-    background: linear-gradient(180deg, #ffffff, #e1e1e1, #8fb7d1, #0466bd, #2d70a4, #0466bd, #8fb7d1, #e1e1e1, #ffffff);
+    background: white;
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 700px;
+    width: 1000px;
     margin-top: 70px;
     margin-bottom:40px;
 
@@ -53,12 +52,12 @@ body {
 
 .form-container input:focus,
 .form-container select:focus {
-    border-color: #007bff;
+    border-color: #084981;
     outline: none;
 }
 
 .form-container button {
-    background-color: #0466bd;
+    background-color: #084981;
     color: #ffffff;
     border: none;
     font-weight: bold;
@@ -67,7 +66,7 @@ body {
 }
 
 .form-container button:hover {
-    background-color: #0056b3;
+    background-color: #023770;
 }
 
 .form-header {
@@ -94,8 +93,6 @@ body {
 .details-container {
   margin-bottom: 20px; /* Adds spacing between the containers */
   padding: 10px;
-  background: #f9f9f9; /* Light background for better visual separation */
-  border: 1px solid #f9f9f9;
   border-radius: 5px;
 }
 
@@ -105,11 +102,9 @@ body {
 }
 
 .info-container {
-  background-color: #f9f9f9; /* Light blue background for distinction */
 }
 
 .details-container {
-  background-color: #f9f9f9; /* Neutral background for distinction */
 }
 
 button {
