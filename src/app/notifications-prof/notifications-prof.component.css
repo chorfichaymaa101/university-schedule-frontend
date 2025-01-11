@@ -2,7 +2,6 @@
     max-width: 900px;
     margin: 40px auto;
     padding: 30px;
-    background: linear-gradient(180deg, #ffffff, #e1e1e1, #8fb7d1, #0466bd, #2d70a4, #0466bd, #8fb7d1, #e1e1e1, #ffffff);
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
@@ -14,7 +13,7 @@
     text-align: center;
     font-size: 26px;
     font-family: "Poppins", sans-serif;
-    color: #2d70a4; /* Changed to your requested color */
+    color: #084981; /* Changed to your requested color */
     margin-bottom: 30px;
     position: relative;
 }
@@ -23,7 +22,7 @@
     content: "";
     width: 50px;
     height: 3px;
-    background: #2d70a4; /* Changed to your requested color */
+    background: #084981; /* Changed to your requested color */
     display: block;
     margin: 10px auto 0;
     border-radius: 3px;
@@ -61,8 +60,8 @@
 
 .notification-icon {
     flex: 0 0 50px;
-    font-size: 40px;
-    color: #2d70a4; /* Changed to your requested color */
+    font-size: 30px;
+    color: #084981; /* Changed to your requested color */
     margin-right: 15px;
 }
 
@@ -74,7 +73,7 @@
     font-size: 15px;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
-    color: #2d70a4; /* Changed to your requested color */
+    color: #084981; /* Changed to your requested color */
     margin-bottom: 10px;
 }
 
@@ -103,7 +102,7 @@
     font-size: 30px;
     margin-bottom: 5px;
     display: block;
-    color: #2d70a4; /* Changed to your requested color */
+    color: #084981; /* Changed to your requested color */
 }
 
 .status-text {

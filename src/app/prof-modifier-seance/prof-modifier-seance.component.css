@@ -10,12 +10,11 @@ body {
 }
 .form-container {
   margin: 20px auto;
-  background: linear-gradient(180deg, #ffffff, #e1e1e1, #8fb7d1, #0466bd, #2d70a4, #0466bd, #8fb7d1, #e1e1e1, #ffffff);
+  background: white;
   padding: 20px 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 90%; /* Reduce width to fit smaller screens */
-  max-width: 700px;
+  width: 1000px;
   margin-bottom: 50px;
   overflow-x: hidden; /* Prevent horizontal scrolling within the form */
   box-sizing: border-box; /* Ensure the padding is included in the width calculation */
@@ -49,11 +48,8 @@ body {
 }
 
 .section-container {
-  margin-bottom: 30px;
-  background-color: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .section-header h3 {
@@ -93,7 +89,7 @@ body {
 
 .form-container button {
   width: 100%;
-  background-color: #0466bd;
+  background-color: #084981;
   color: #ffffff;
   border: none;
   font-weight: bold;

@@ -3,7 +3,6 @@
     max-width: 900px;
     margin: 40px auto;
     padding: 20px;
-    background: linear-gradient(180deg, #ffffff, #d3d3d3, #0466bd, #2d70a4, #0466bd, #d3d3d3, #ffffff); /* Replaced purple with a blue shade */
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
@@ -15,7 +14,7 @@
     text-align: center;
     font-size: 26px;
     font-family: "Poppins", sans-serif;
-    color: #2d70a4; /* White color for contrast against the gradient */
+    color: #084981; /* White color for contrast against the gradient */
     margin-bottom: 30px;
     position: relative;
 }
@@ -25,7 +24,7 @@
     content: "";
     width: 50px;
     height: 3px;
-    background: #2d70a4; /* White color for the line */
+    background: #084981; /* White color for the line */
     display: block;
     margin: 10px auto 0;
     border-radius: 3px;
@@ -55,7 +54,7 @@ li:hover {
 
 /* Title inside individual notifications - Smaller size */
 h4 {
-    color: #2d70a4;
+    color: #084981;
     font-size: 16px; /* Smaller title size */
     font-weight: 600;
     margin-bottom: 15px;
@@ -104,7 +103,7 @@ div.no-notifications {
 
 .notification-action button {
     padding: 8px 15px;
-    background-color: #2d70a4;
+    background-color: #084981;
     border: none;
     border-radius: 8px;
     color: white;
@@ -114,7 +113,7 @@ div.no-notifications {
 }
 
 .notification-action button:hover {
-    background-color: #3a76c4;
+    background-color: #084981;
 }
 
 /* Add some space between the notification and the bottom */
