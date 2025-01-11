@@ -7,10 +7,11 @@ body {
     min-height: 100vh; /* Ensure the body is at least as tall as the viewport */
     overflow-y: auto; /* Enable vertical scrolling if needed */
     overflow-x: hidden; /* Prevent horizontal scrolling */
+    background-color: white;
 }
 
 .form-container {
-    background: white;
+   background: white;
     padding: 20px 30px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

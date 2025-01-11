@@ -11,11 +11,6 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      .content{
-        padding-top:0;
-      }
-    </style>
   </head>
 
   <body>
@@ -27,12 +22,13 @@
           <div class="content container-fluid mb-4">
             <router-outlet></router-outlet>
           </div>
+          <app-footer></app-footer>
         </div>
       </div>
     </ng-container>
+
     <ng-template #indexPage>
      
     </ng-template>
-    
   </body>
 </html>
