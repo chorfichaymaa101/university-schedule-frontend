@@ -4,5 +4,5 @@ export interface Person{
     role: string;
     email: string;
     name: string;
-    password: string;
+    semesterId: number;
 }
