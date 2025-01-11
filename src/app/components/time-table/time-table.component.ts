@@ -179,8 +179,6 @@ if (capacityControl && typeControl) {
     
   }
 
-  
-
   timeTableByYearBySemester(programId: number, year: string): void {
     this.timeTableService.checkIfExists(programId, year).subscribe({
       next: (exist: boolean) => {
