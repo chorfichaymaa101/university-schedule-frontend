@@ -17,7 +17,7 @@
     <div class="form-group-container">
       <div>
         <label for="professorId">Professor ID</label>
-        <input id="professorId" name="professorId" type="number" ngModel required />
+        <input class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="professorId" name="professorId" type="number" ngModel required />
       </div>
     </div>
 
@@ -29,7 +29,7 @@
       <div class="form-group-container">
         <div>
           <label for="module">Module</label>
-          <select id="module" name="moduleId" ngModel required>
+          <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="module" name="moduleId" ngModel required>
             <option value="" disabled selected>Choisir un Module</option>
             <option *ngFor="let module of modules" [value]="module.id">
               {{ module.moduleName }}
@@ -39,7 +39,7 @@
         
         <div>
           <label for="program">Filière</label>
-          <select id="program" name="programId" ngModel required>
+          <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="program" name="programId" ngModel required>
             <option value="" disabled selected>Choisir une Filière</option>
             <option *ngFor="let program of programs" [value]="program.id">
               {{ program.programName }}
@@ -49,7 +49,7 @@
 
         <div>
           <label for="semester">Semestre</label>
-          <select id="semester" name="semesterId" ngModel required>
+          <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="semester" name="semesterId" ngModel required>
             <option value="" disabled selected>Choisir un Semestre</option>
             <option *ngFor="let semester of semesters" [value]="semester.semesterId">
               Semestre {{ semester.semesterId }}
@@ -67,7 +67,7 @@
       <div class="form-group-container">
         <div>
           <label for="oldClass">Ancienne Classe</label>
-          <select id="oldClass" name="oldClass" ngModel required>
+          <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="oldClass" name="oldClass" ngModel required>
             <option value="" disabled selected>Choisir une Classe</option>
             <option *ngFor="let class of classes" [value]="class.id">
                {{ class.classname }}
@@ -77,7 +77,7 @@
 
         <div>
           <label for="oldDay">Ancien Jour</label>
-          <select id="oldDay" name="oldDay" ngModel required>
+          <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="oldDay" name="oldDay" ngModel required>
             <option value="" disabled selected>Choisir un jour</option>
             <option value="Monday">Lundi</option>
             <option value="Tuesday">Mardi</option>
@@ -94,11 +94,11 @@
       <div class="time-group">
         <div>
           <label for="oldTime">Début d'Ancienne Séance</label>
-          <input id="oldTime" name="oldTime" type="time" ngModel required />
+          <input class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="oldTime" name="oldTime" type="time" ngModel required />
         </div>
         <div>
           <label for="endOldTime">Fin d'Ancienne Séance</label>
-          <input id="endOldTime" name="endOldTime" type="time" ngModel required />
+          <input class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="endOldTime" name="endOldTime" type="time" ngModel required />
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@
       <div class="form-group-container">
         <div>
           <label for="newClass">Nouvelle Classe</label>
-          <select id="newClass" name="newClass" ngModel required>
+          <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="newClass" name="newClass" ngModel required>
             <option value="" disabled selected>Choisir une Classe</option>
             <option *ngFor="let class of classes" [value]="class.id">
                {{ class.classname }}
@@ -121,7 +121,7 @@
 
         <div>
           <label for="newDay">Nouveau Jour</label>
-          <select id="newDay" name="newDay" ngModel required>
+          <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="newDay" name="newDay" ngModel required>
             <option value="" disabled selected>Choisir un jour</option>
             <option value="Monday">Lundi</option>
             <option value="Tuesday">Mardi</option>
@@ -138,11 +138,11 @@
       <div class="time-group">
         <div>
           <label for="newTime">Début de Nouvelle Séance</label>
-          <input id="newTime" name="newTime" type="time" ngModel required />
+          <input class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="newTime" name="newTime" type="time" ngModel required />
         </div>
         <div>
           <label for="endNewTime">Fin de Nouvelle Séance</label>
-          <input id="endNewTime" name="endNewTime" type="time" ngModel required />
+          <input class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="endNewTime" name="endNewTime" type="time" ngModel required />
         </div>
       </div>
     </div>
