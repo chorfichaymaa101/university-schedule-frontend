@@ -57,13 +57,21 @@ body {
 }
 
 .form-container button {
+    width: 100%;
     background-color: #084981;
     color: #ffffff;
     border: none;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
+    text-align: center;
+    padding: 15px;
+    font-size: 16px; /* Increased font size */
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 20px; /* Space above the button */
+  }
 
 .form-container button:hover {
     background-color: #023770;
