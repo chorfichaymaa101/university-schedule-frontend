@@ -107,6 +107,8 @@ throw new Error('Method not implemented.');
 
   ngOnInit(): void {
   // Charger les programmes depuis le service
+  this.loadAcademicYears();
+  this.loadSemesters();
 
   this.firstFormGroup.get('semester')?.valueChanges.subscribe(semester => {
     if (semester) {
