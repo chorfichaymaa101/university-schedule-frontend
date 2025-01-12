@@ -192,8 +192,8 @@ if (capacityControl && typeControl) {
           };
           this.timeTableService.savetimeTable(newTimeTable).subscribe({
             next: (timeTable: TimeTable) => {
-              this.idTimeTable = newTimeTable.id;
-              this.loadSessions(newTimeTable.id);  // Charger les sessions
+              this.idTimeTable = timeTable.id; // Utiliser l'ID généré par le backend
+              this.loadSessions(timeTable.id);  // Charger les sessions
             },
             error: (err: HttpErrorResponse) => {
               console.error('Erreur de sauvegarde de l\'emploi du temps:', err);
@@ -265,8 +265,14 @@ if (capacityControl && typeControl) {
         } else {
           let newRow = { day, [slot]: sessionWithDetails };
           this.dataSource.push(newRow);
-          
         }
+
+        // Tri des données en fonction de l'ordre des jours dans 'dayNames'
+        this.dataSource = this.dataSource.sort((a, b) => {
+          const indexA = this.dayNames.indexOf(a.day);
+          const indexB = this.dayNames.indexOf(b.day);
+          return indexA - indexB;
+        });
 
         // Mise à jour de la table
         this.dataSource = [...this.dataSource];
@@ -278,7 +284,8 @@ if (capacityControl && typeControl) {
         console.error('Erreur lors de la récupération des détails:', err);
       }
     });
-  }
+}
+
 
   
   

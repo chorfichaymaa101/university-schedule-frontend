@@ -136,28 +136,36 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
 });
   }
 
-  examTableByYearBySemester( semester: string, year: string,): void{
+  examTableByYearBySemester(semester: string, year: string): void {
     this.examTableService.checkIfExists(semester, year).subscribe({
       next: (exist: boolean) => {
-        if(exist == false){
+        if (!exist) {
           const newExamTable: ExamTable = {
-            id: 0,
+            id: 0, // ID initial avant enregistrement
             academicYear: year,
             semester: semester,
-          }
+          };
+  
+          // Sauvegarde de l'examTable
           this.examTableService.saveexamTable(newExamTable).subscribe({
-           
-           });
-          this.idExamTable = newExamTable.id;
-          this.sessionService.getSessionExamByExamCalendar(newExamTable.id).subscribe({
-            next: (res: SessionExam[]) => {
-              this.processSessionExams(res);
-            }, 
-            error: (err: HttpErrorResponse) => {
-              console.error('Erreur de récupération :', err);
+            next: (savedExamTable: ExamTable) => {
+              // Assurez-vous de récupérer l'ID depuis la réponse de l'API
+              this.idExamTable = savedExamTable.id;
+  
+              // Charger les sessions avec l'ID retourné
+              this.sessionService.getSessionExamByExamCalendar(this.idExamTable).subscribe({
+                next: (res: SessionExam[]) => {
+                  this.processSessionExams(res); // Traiter les sessions récupérées
+                },
+                error: (err: HttpErrorResponse) => {
+                  console.error('Erreur de récupération des sessions :', err);
+                },
+              });
             },
-          })
-
+            error: (err: HttpErrorResponse) => {
+              console.error('Erreur lors de la sauvegarde de l\'examTable :', err);
+            },
+          });
         }
         else{
           
