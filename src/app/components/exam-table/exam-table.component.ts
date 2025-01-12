@@ -26,6 +26,7 @@ import { Module } from 'src/app/models//module.model';
 import { Class } from 'src/app/models//class.model';
 import { CommonModule } from '@angular/common';
 import { MatOptionModule } from '@angular/material/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-exam-table',
   standalone: true,
@@ -51,9 +52,9 @@ import { MatOptionModule } from '@angular/material/core';
   styleUrls: ['./exam-table.component.css'],
 })
 export class ExamTableComponent {
-updateTable() {
-throw new Error('Method not implemented.');
-}
+  navigateToEditPage(): void {
+    this.router.navigate(['/exam-table-edit']);
+  }
 deleteTable() {
 throw new Error('Method not implemented.');
 }
@@ -102,7 +103,8 @@ throw new Error('Method not implemented.');
   constructor(
     private _formBuilder: FormBuilder,
     private examTableService: ExamTableService,
-    private sessionService: SessionExamService
+    private sessionService: SessionExamService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

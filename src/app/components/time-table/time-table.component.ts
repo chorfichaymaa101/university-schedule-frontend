@@ -39,7 +39,7 @@ import { Time } from 'src/app/models/time.model';
 import { SessionType } from 'src/app/models/session-type.model';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-
+import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 @Component({
   selector: 'app-time-table',
@@ -70,9 +70,9 @@ import { combineLatest } from 'rxjs';
   styleUrls: ['./time-table.component.css']
 })
 export class TimeTableComponent {
-updateTimetable() {
-throw new Error('Method not implemented.');
-}
+  navigateToEditPage(): void {
+    this.router.navigate(['/time-table-edit']);
+  }
 deleteTimetable() {
 throw new Error('Method not implemented.');
 }
@@ -140,7 +140,8 @@ throw new Error('Method not implemented.');
   constructor(
     private _formBuilder: FormBuilder,
     private timeTableService: TimeTableService,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

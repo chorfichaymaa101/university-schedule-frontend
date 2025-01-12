@@ -18,7 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-semester-table',
@@ -47,8 +47,8 @@ export class SemesterTableComponent implements OnInit {
 deleteTable() {
 throw new Error('Method not implemented.');
 }
-updateTable() {
-throw new Error('Method not implemented.');
+navigateToEditPage(): void {
+  this.router.navigate(['/semester-table-edit']);
 }
 
 
@@ -77,7 +77,8 @@ throw new Error('Method not implemented.');
 
   constructor(
     private _formBuilder: FormBuilder,
-    private semesterTableService: SemesterTableService
+    private semesterTableService: SemesterTableService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
