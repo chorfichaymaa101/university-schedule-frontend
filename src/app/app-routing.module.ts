@@ -18,21 +18,18 @@ import { NotificationsStudentComponent } from './notifications-student/notificat
 import { NotificationsHeaderComponent } from './notifications-header/notifications-header.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { GestionProfComponent } from './components/gestion/gestion-prof/gestion-prof.component';
+
+import { GestionProgramComponent } from './components/gestion/gestion-program/gestion-program.component';
+
+import { EditProgramComponent } from './components/edit/edit-program/edit-program.component';
+
 
 const routes: Routes = [
   { path :'' , component: HomeComponent},
-  {
-    path: 'semesterTable',
-    component: SemesterTableComponent
-  },
-  {
-    path: 'examTable',
-    component: ExamTableComponent
-  },
-  {
-    path: 'timeTable',
-    component: TimeTableComponent
-  },
+  { path: 'semesterTable',component: SemesterTableComponent},
+  { path: 'examTable', component: ExamTableComponent},
+  { path: 'timeTable', component: TimeTableComponent},
   { path: 'demanderRattrapage', component: RequestFormComponent },
   { path: 'notificationsProfesseur', component: NotificationsProfComponent },
   { path: 'changerSeance', component: ProfModifierSeanceComponent },
@@ -40,7 +37,11 @@ const routes: Routes = [
   { path: 'historiqueAdmin', component: HistoriqueNotifsAdminComponent },
   { path: 'notificationsEtudiant', component: NotificationsStudentComponent },
   { path: 'notifications-header', component: NotificationsHeaderComponent },
-
+  { path :'home' , component: HomeComponent},
+  { path :'profs' , component: GestionProfComponent},
+  { path :'programs' , component: GestionProgramComponent},
+  { path :'programs/edit' , component: EditProgramComponent},
+ 
   
     // not-found
     { path :'**' , component: NotFoundComponent},

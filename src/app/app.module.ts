@@ -14,6 +14,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NotFoundComponent } from './components/widgets/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EditProgramComponent } from './components/edit/edit-program/edit-program.component';
+import { GestionProgramComponent } from './components/gestion/gestion-program/gestion-program.component';
+import { GestionProfComponent } from './components/gestion/gestion-prof/gestion-prof.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { LoginComponent } from './components/widgets/login/login.component';
+import { SignupComponent } from './components/widgets/signup/signup.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -23,10 +32,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     FooterComponent,
     //PageHeaderComponent,
-   
+    EditProgramComponent,
     NotFoundComponent,
+    GestionProgramComponent,
+    GestionProfComponent,
+    LoginComponent,
+    SignupComponent,
    
-    
     
   ],
   imports: [
@@ -36,7 +48,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    CommonModule
+    CommonModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
