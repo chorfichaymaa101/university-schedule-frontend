@@ -15,6 +15,9 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -32,7 +35,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
     MatTableModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatOptionModule,
+    MatSelectModule,
+    CommonModule,
   ],
   templateUrl: './semester-table.component.html',
   styleUrls: ['./semester-table.component.css'],
@@ -41,16 +47,20 @@ export class SemesterTableComponent implements OnInit {
 
 
   displayedColumns: string[] = ['dateDebut', 'designation'];
-  dataSource: SemesterTable[] = []; 
-  academicYear: string = ''; 
-  
+  dataSource: SemesterTable[] = [];
+  academicYear: string = '';
+  selectedYear: string | null = null;
+  academicYears: string[] = [];
+  stepperVisible: boolean = false;
+  loadingSessions: boolean = false;
+
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
 
   secondFormGroup = this._formBuilder.group({
-    
+
   });
 
   thirdFormGroup = this._formBuilder.group({
@@ -64,13 +74,36 @@ export class SemesterTableComponent implements OnInit {
     private semesterTableService: SemesterTableService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadAcademicYears();
+  }
+  onAddButtonClick(): void {
+    this.stepperVisible = true;
+    console.log('Stepper Visible:', this.stepperVisible);
+  }
+
+  loadAcademicYears(): void {
+    this.semesterTableService.getAllSemestertable().subscribe({
+      next: (semestertables) => {
+        this.academicYears = [
+          ...new Set(semestertables.map((table) => table.year)),
+        ]; // Extract unique academic years
+      },
+      error: (err) => console.error('Error fetching academic years:', err),
+    });
+  }
+  onSelectionChange(): void {
+    if (this.selectedYear && this.selectedYear) {
+      this.getSemestertableByYear(this.selectedYear);
+    }
+  }
+
 
 
   getSemestertableByYear(academicYear: string): void {
     this.semesterTableService.getSemestertableByYear(academicYear).subscribe({
       next: (res: SemesterTable[]) => {
-        this.dataSource = res; 
+        this.dataSource = res;
         console.log('Données récupérées :', this.dataSource);
       },
       error: (err: HttpErrorResponse) => {
@@ -83,8 +116,8 @@ export class SemesterTableComponent implements OnInit {
   onYearSubmit(): void {
     const yearValue = this.firstFormGroup.get('firstCtrl')?.value?.trim();
     if (yearValue) {
-      this.academicYear = yearValue; 
-      this.getSemestertableByYear(yearValue); 
+      this.academicYear = yearValue;
+      this.getSemestertableByYear(yearValue);
       console.log('Les données sont bien récupéré');
     } else {
       console.log('Année invalide. Veuillez saisir une année valide.');
@@ -101,7 +134,7 @@ export class SemesterTableComponent implements OnInit {
       designation: this.thirdFormGroup.get('designation')?.value ?? '',
       year: this.academicYear,
     };
-  
+
     this.semesterTableService.savesemesterTable(newRow).subscribe({
       next: (res: SemesterTable) => {
         console.log('Nouvelle ligne ajoutée :', res);
@@ -118,7 +151,7 @@ export class SemesterTableComponent implements OnInit {
     const localDate = new Date(date);
     const utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
     return utcDate.toISOString().split('T')[0];
-    
+
   }
-  
+
 }

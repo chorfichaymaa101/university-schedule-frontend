@@ -5,9 +5,105 @@
     text-align: center;
     font-size: 13px;
 }
+h2{
+  color: #084981
+}
 
 .thData{
     text-align: center;
     font-size: 19px;
     font-weight: bold;
 }
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed; /* Ensure equal width for cells unless overridden by content */
+  word-wrap: break-word; /* Allow breaking long words */
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  text-align: center;
+  overflow: hidden; /* Hide overflow if content doesn't fit */
+  white-space: nowrap; /* Prevent wrapping for better layout */
+  text-overflow: ellipsis; /* Show ellipsis for overflowing text */
+}
+
+.table .session-cell {
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+.table th {
+  background-color: #084981;
+  font-weight: bold;
+  color: #ced4da;
+}
+
+.table-primary {
+  background-color: #becde6;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.alert {
+  margin-top: 20px;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #8d151f;
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  color: #454555;
+}
+
+.timetable {
+  margin-top: 20px;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #3780c9;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.row.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+

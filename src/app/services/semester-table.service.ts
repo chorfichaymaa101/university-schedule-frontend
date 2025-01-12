@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
   providedIn: 'root',
 })
 export class SemesterTableService {
-  
+
   constructor(private httpClient: HttpClient) {}
 
   public savesemesterTable(semesterable: SemesterTable): Observable<SemesterTable> {
@@ -17,6 +17,10 @@ export class SemesterTableService {
 
   public getSemestertableByYear(year: string): Observable<SemesterTable[]> {
     return this.httpClient.get<SemesterTable[]>(`${environment.backendHost}/semestertable/${year}`);
+  }
+
+  public getAllSemestertable(): Observable<SemesterTable[]> {
+    return this.httpClient.get<SemesterTable[]>(`${environment.backendHost}/semestertable`);
   }
 }
 
