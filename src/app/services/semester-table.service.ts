@@ -18,9 +18,13 @@ export class SemesterTableService {
   public getSemestertableByYear(year: string): Observable<SemesterTable[]> {
     return this.httpClient.get<SemesterTable[]>(`${environment.backendHost}/semestertable/${year}`);
   }
-
   public getAllSemestertable(): Observable<SemesterTable[]> {
     return this.httpClient.get<SemesterTable[]>(`${environment.backendHost}/semestertable`);
+  }
+
+  
+  public updateSemesterTable(semesterTable: SemesterTable): Observable<void> {
+    return this.httpClient.put<void>(`${environment.backendHost}/updateSemesterTable`, semesterTable);
   }
 }
 

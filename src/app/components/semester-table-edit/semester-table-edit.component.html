@@ -1,0 +1,92 @@
+<h2>Modification du Calendrier de Semestre</h2>
+<mat-stepper linear #stepper class="scrollable-stepper">
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" (ngSubmit)="onYearSubmit()">
+      <ng-template matStepLabel>Information de Calendrier de Semestre</ng-template>
+      <div class="text-center mt-3">
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Année universitaire</mat-label>
+          <input matInput placeholder="Année Universitaire" formControlName="firstCtrl" required name="year">
+        </mat-form-field>
+      </div>
+      <div class="text-center mt-3">
+        <button mat-raised-button color="primary" matStepperNext>Continuer</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>Calendrier de Semestre</ng-template>
+
+    <div class="text-center mt-3">
+      <!-- In the second step, make each row clickable to select a semester -->
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="dateDebut">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.dateDebut}} à {{element.dateFin}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="designation">
+          <th mat-header-cell *matHeaderCellDef> Designation </th>
+          <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+        </ng-container>
+
+        <!-- Define header row and body row -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="onRowSelect(row)"
+            class="clickable-cell"
+        ></tr>
+      </table>
+    </div>
+
+    <form [formGroup]="secondFormGroup">
+      <div class="text-center mt-3">
+        <button mat-raised-button class="m-2" matStepperPrevious>Retour</button>
+        <button mat-raised-button color="primary" matStepperNext>Continuer</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="thirdFormGroup">
+    <ng-template matStepLabel>Modifier une ligne</ng-template>
+    <form [formGroup]="thirdFormGroup" (ngSubmit)="updateSemesterRow()">
+      <div class="text-center mt-3">
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Date Début</mat-label>
+          <input matInput [matDatepicker]="pickerStart" formControlName="dateDebut" required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerStart">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Date Fin</mat-label>
+          <input matInput [matDatepicker]="pickerEnd" formControlName="dateFin" required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerEnd">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Designation</mat-label>
+          <input matInput formControlName="designation" required />
+        </mat-form-field><br>
+      </div>
+
+      <div class="text-center mt-3">
+        <button mat-raised-button class="m-2" matStepperPrevious>Retour</button>
+        <button mat-raised-button color="primary" type="submit">Mettre à jour</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+
+</mat-stepper>

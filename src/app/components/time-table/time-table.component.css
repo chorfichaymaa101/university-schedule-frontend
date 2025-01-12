@@ -24,3 +24,15 @@ h2{
     max-width: 1200px;
     padding: 20px;
   }
+  
+.clickable-cell {
+    cursor: pointer;
+    padding: 8px;
+    border: 1px solid transparent;
+  }
+  
+  .clickable-cell:hover {
+    border-color: #1976d2;
+    background-color: #e3f2fd;
+  }
+  

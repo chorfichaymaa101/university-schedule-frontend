@@ -19,6 +19,13 @@ import { NotificationsHeaderComponent } from './notifications-header/notificatio
 
 import { HttpClientModule } from '@angular/common/http';
 
+import { SemesterTableEditComponent  } from './components/semester-table-edit/semester-table-edit.component';
+import {ExamTableEditComponent} from "./components/exam-table-edit/exam-table-edit.component";
+import {TimeTableEditComponent} from "./components/time-table-edit/time-table-edit.component";
+//import { ModifyTimeTableComponent } from './components/modify-exam/modify-exam.component';
+//import { ModifyExamComponent } from './components/modify-time-table/modify-time-table.component';
+
+
 const routes: Routes = [
   { path :'' , component: HomeComponent},
   {
@@ -41,7 +48,9 @@ const routes: Routes = [
   { path: 'notificationsEtudiant', component: NotificationsStudentComponent },
   { path: 'notifications-header', component: NotificationsHeaderComponent },
 
-  
+  { path: 'semester-table-edit', component: SemesterTableEditComponent },
+  { path: 'time-table-edit', component: TimeTableEditComponent },
+  { path: 'exam-table-edit', component: ExamTableEditComponent },
     // not-found
     { path :'**' , component: NotFoundComponent},
 ];
