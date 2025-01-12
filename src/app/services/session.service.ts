@@ -20,26 +20,26 @@ export class SessionService {
   public savesession(session: Session): Observable<Session> {
           return this.httpClient.post<Session>(`${environment.backendHost}/session`, session);
       }
-        
+
   public getSessionByTimeTableByDayByTime(timetableId: number , day: string, time: string): Observable<Session>{
           return this.httpClient.get<Session>(`${environment.backendHost}/session/${timetableId}/${day}/${time}`)
   }
-      
+
       //prof
   public getProfById(profId: number ): Observable<Person>{
         return this.httpClient.get<Person>(`${environment.backendHost}/profById/${profId}`)
   }
-  
+
       public getPersonByProgram(programId: number ): Observable<Person[]>{
         return this.httpClient.get<Person[]>(`${environment.backendHost}/prof/${programId}`)
       }
-  
-  
+
+
       //program
       public getProgramById(programId: number ): Observable<Program>{
         return this.httpClient.get<Program>(`${environment.backendHost}/programById/${programId}`)
       }
-  
+
       //module
       public getModuleById(moduleId: number ): Observable<Module>{
         return this.httpClient.get<Module>(`${environment.backendHost}/moduleById/${moduleId}`)
@@ -47,15 +47,17 @@ export class SessionService {
       public getModuleByProgram(programId: number ): Observable<Module[]>{
         return this.httpClient.get<Module[]>(`${environment.backendHost}/module/${programId}`)
       }
-  
+
       //classe
       public getClasseById(classId: number ): Observable<Class>{
         return this.httpClient.get<Class>(`${environment.backendHost}/classById/${classId}`)
       }
-  
+
       public getClassByTypeCapacity(sessiontype: number, capacity: number): Observable<Class[]>{
         return this.httpClient.get<Class[]>(`${environment.backendHost}/class/${sessiontype}/${capacity}`)
       }
 
-
+    public updateSession(session : Session): Observable<void>{
+      return this.httpClient.put<void>(`${environment.backendHost}/updateSession`, session)
+    }
 }

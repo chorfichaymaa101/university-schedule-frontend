@@ -1,0 +1,164 @@
+
+<h2>Emploi du temps</h2>
+<mat-stepper linear #stepper class="scrollable-stepper">
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" (ngSubmit)="onYearSubmit()">
+      <ng-template matStepLabel>Information de l'emploi des examens</ng-template>
+      <div class="text-center mt-3">
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Année universitaire</mat-label>
+          <input matInput placeholder="Année Universitaire" formControlName="year" required>
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Filière</mat-label>
+          <mat-select formControlName="prog" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let program of programs" [value]="program.id">
+              {{program.programName}} {{program.semester}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+      </div>
+      <div class="text-center mt-3">
+        <button mat-raised-button color="primary" matStepperNext>Continuer</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>Emploi du temps</ng-template>
+
+    <div class="text-center mt-3">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Jour -->
+        <ng-container matColumnDef="day">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let row" class="thData" (click)="onCellSelected(row, 'day')">
+            {{ row.day }}
+          </td>
+        </ng-container>
+
+        <!-- Périodes horaires -->
+        <ng-container *ngFor="let slot of displayedColumns.slice(1)" [matColumnDef]="slot">
+          <th mat-header-cell *matHeaderCellDef class="thData"> {{ timeSlotss[slot] }} </th>
+          <td mat-cell *matCellDef="let element" id="tdData">
+            <div
+              *ngIf="element[slot]"
+              class="clickable-cell"
+              (click)="onCellSelected(element[slot], slot)">
+              {{ element[slot].moduleName }}<br>
+              {{ element[slot].sessionType }}<br>
+              {{ element[slot].professorName }}<br>
+              {{ element[slot].className }}<br>
+              {{ element[slot].groupe }}
+            </div>
+            <div
+              *ngIf="!element[slot]"
+              class="clickable-cell"
+              (click)="onCellSelected(null, slot)">
+              <p>NS</p>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Lignes -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+    <form [formGroup]="secondFormGroup">
+      <div class="text-center mt-3">
+        <button mat-raised-button class="m-2" matStepperPrevious>Retour</button>
+        <button mat-raised-button color="primary" matStepperNext>Continuer</button>
+      </div>
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup" (ngSubmit)="UpdateSessionRow()">
+      <ng-template matStepLabel>Ajouter une ligne</ng-template>
+
+      <div class="text-center mt-3">
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Professeur</mat-label>
+          <mat-select formControlName="prof" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let person of persons" [value]="person.id">
+              {{person.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Module</mat-label>
+          <mat-select formControlName="module" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let module of modules" [value]="module.id">
+              {{module.moduleName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Jour</mat-label>
+          <mat-select formControlName="day" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let day of days" [value]="day">
+              {{day}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Période</mat-label>
+          <mat-select formControlName="time" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let period of periods" [value]="period">
+              {{period}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Type</mat-label>
+          <mat-select formControlName="type" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let type of types; let i = index" [value]="i.toString()">
+              {{type}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Groupe</mat-label>
+          <input matInput formControlName="groupe" required />
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Capacité</mat-label>
+          <input matInput formControlName="capacity" required />
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Classe</mat-label>
+          <mat-select formControlName="classe" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let classe of classes" [value]="classe.id">
+              {{classe.classname}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+      </div>
+
+      <div class="text-center mt-3">
+        <button mat-raised-button class="m-2" matStepperPrevious>Retour</button>
+        <button mat-raised-button color="primary" matStepperNext>Modifier</button>
+      </div>
+
+    </form>
+  </mat-step>
+</mat-stepper>

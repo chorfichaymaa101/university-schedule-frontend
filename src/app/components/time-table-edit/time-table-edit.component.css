@@ -1,15 +1,15 @@
 .scrollable-stepper{
-    color: black;
+  color: black;
 }
 #tdData{
-    text-align: center;
-    font-size: 13px;
+  text-align: center;
+  font-size: 13px;
 }
 
 .thData{
-    text-align: center;
-    font-size: 19px;
-    font-weight: bold;
+  text-align: center;
+  font-size: 19px;
+  font-weight: bold;
 }
 
 .clickable-cell {
