@@ -218,6 +218,7 @@ if (capacityControl && typeControl) {
   }
   
   loadSessions(timeTableId: number): void {
+    this.dataSource = [];
     this.dayNames.forEach((day) => {
       this.timeSlots.forEach((slot) => {
         this.sessionService.getSessionByTimeTableByDayByTime(timeTableId, day, slot).subscribe({
@@ -293,6 +294,7 @@ if (capacityControl && typeControl) {
     const yearValue = this.firstFormGroup.get('year')?.value?.trim();
     const progValue = Number(this.firstFormGroup.get('prog')?.value) || 0;
     if (yearValue && progValue) {
+      this.dataSource = [];
       this.programId = progValue;
       this.timeTableByYearBySemester(progValue, yearValue);
       console.log('Les données sont bien récupéré');

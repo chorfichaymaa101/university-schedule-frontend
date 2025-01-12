@@ -229,6 +229,7 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
     const yearValue = this.firstFormGroup.get('year')?.value?.trim();
     const semesterValue = this.firstFormGroup.get('semester')?.value?.trim();
     if (yearValue && semesterValue) {
+      this.dataSource = [];
       this.year = yearValue; 
       this.semester = semesterValue;
       this.examTableByYearBySemester(semesterValue, yearValue); 
