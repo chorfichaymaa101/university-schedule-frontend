@@ -12,7 +12,7 @@ export class ProgramServiceService {
   constructor(private http:HttpClient) { }
 
   public getPrograms(): Observable<Program[]> {
-      return this.http.get<Program[]>(environment.backendHost + "/programs");
+      return this.http.get<Program[]>(environment.backendHost + "/api/programs");
   }
 
   public saveProgram(Program: Program): Observable<HttpResponse<string>> {
