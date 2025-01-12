@@ -1,96 +1,92 @@
 <h2>Calendrier d'examen</h2>
-<div *ngIf="!stepperVisible" class="text-center mt-3">
-  <!-- Dropdown Section -->
-  <div class="dropdowns row justify-content-center mb-4">
-    <div class="col-6 col-md-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Année universitaire</mat-label>
-        <mat-select
-          [(ngModel)]="selectedYear"
-          (selectionChange)="onSelectionChange()"
-        >
-          <mat-option *ngFor="let year of academicYears" [value]="year">{{
-            year
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
+<div class="container mt-4">
+  <div *ngIf="!stepperVisible" class="text-center mt-3">
+
+    <!-- Dropdown Section -->
+    <div class="dropdowns row justify-content-center mb-4">
+      <div class="col-6 col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Année universitaire</mat-label>
+          <mat-select
+            [(ngModel)]="selectedYear"
+            (selectionChange)="onSelectionChange()"
+          >
+            <mat-option *ngFor="let year of academicYears" [value]="year">{{
+              year
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Semestre</mat-label>
+          <mat-select
+            [(ngModel)]="selectedSemester"
+            (selectionChange)="onSelectionChange()"
+          >
+            <mat-option *ngFor="let semester of semesters" [value]="semester">
+              {{ semester }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
-    <div class="col-6 col-md-3">
-      <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Semestre</mat-label>
-        <mat-select
-          [(ngModel)]="selectedSemester"
-          (selectionChange)="onSelectionChange()"
-        >
-          <mat-option *ngFor="let semester of semesters" [value]="semester">
-            {{ semester }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="text-center mt-3">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="prof">
-        <th mat-header-cell *matHeaderCellDef>Professeur</th>
-        <td mat-cell *matCellDef="let element">{{ element.professorName }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="program">
-        <th mat-header-cell *matHeaderCellDef>Filière</th>
-        <td mat-cell *matCellDef="let element">{{ element.programName }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="module">
-        <th mat-header-cell *matHeaderCellDef>Module</th>
-        <td mat-cell *matCellDef="let element">{{ element.moduleName }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="horaire">
-        <th mat-header-cell *matHeaderCellDef>Horaire</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.examPeriodDebut }} à {{ element.examPeriodFin }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="classe">
-        <th mat-header-cell *matHeaderCellDef>Classe</th>
-        <td mat-cell *matCellDef="let element">{{ element.className }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="day">
-        <th mat-header-cell *matHeaderCellDef>Jour</th>
-        <td mat-cell *matCellDef="let element">{{ element.day }}</td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-  <!-- Fallback for No Data -->
-  <div
-  *ngIf="!loadingSessions && dataSource.length === 0"
-  class="alert alert-info text-center my-5"
->
-  <p class="mb-0">
-    Veuillez sélectionner un semestre et
-    une année universitaire.
-  </p>
-</div>
-  <!-- Action Buttons -->
-  <div class="d-flex justify-content-center gap-3 mt-5">
-    <button
-      mat-raised-button
-      style="background-color: #084981; color: white"
-      (click)="stepperVisible = true"
+    <!-- Timetable Display -->
+    <div
+      *ngIf="!loadingSessions && dataSource.length > 0"
+      class="table-container mat-elevation-z8"
     >
-      <mat-icon>add</mat-icon>
-      Créer un calendrier d'exam
-    </button>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead style="background-color: #084981; color: white;" class="table-light">
+            <tr>
+              <th>Professeur</th>
+              <th>Filière</th>
+              <th>Module</th>
+              <th>Horaire</th>
+              <th>Classe</th>
+              <th>Jour</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of dataSource">
+              <td>{{ row.professorName }}</td>
+              <td>{{ row.programName }}</td>
+              <td>{{ row.moduleName }}</td>
+              <td>{{ row.examPeriodDebut }} à {{ row.examPeriodFin }}</td>
+              <td>{{ row.className }}</td>
+              <td>{{ row.day }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fallback for No Data -->
+    <div
+      *ngIf="!loadingSessions && dataSource.length === 0"
+      class="alert alert-info text-center my-5"
+    >
+      <p class="mb-0">
+        Veuillez sélectionner un semestre et une année universitaire.
+      </p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-center gap-3 mt-5">
+      <button
+        mat-raised-button
+        style="background-color: #084981; color: white"
+        (click)="stepperVisible = true"
+      >
+        <mat-icon>add</mat-icon>
+        Créer un calendrier d'exam
+      </button>
+    </div>
   </div>
 </div>
-
 <div>
   <mat-stepper linear #stepper *ngIf="stepperVisible" class="scrollable-stepper">
 

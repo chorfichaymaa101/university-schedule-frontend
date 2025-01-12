@@ -1,6 +1,8 @@
 <h2>Calendrier de Semestre</h2>
-<div class="text-center mt-3">
+
+<div class="container mt-4">
   <div *ngIf="!stepperVisible" class="text-center mt-3">
+
     <!-- Dropdown Section -->
     <div class="dropdowns row justify-content-center mb-4">
       <div class="col-6 col-md-3">
@@ -16,45 +18,54 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="dateDebut">
-          <th mat-header-cell *matHeaderCellDef>Date</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.dateDebut }} à {{ element.dateFin }}
-          </td>
-        </ng-container>
+    </div>
 
-        <ng-container matColumnDef="designation">
-          <th mat-header-cell *matHeaderCellDef>Designation</th>
-          <td mat-cell *matCellDef="let element">{{ element.designation }}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-      <!-- Fallback for No Data -->
+    <!-- Table Display -->
     <div
-    *ngIf="!loadingSessions && dataSource.length === 0"
-    class="alert alert-info text-center my-5"
-  >
-    <p class="mb-0">
-      Veuillez sélectionner
-      une année universitaire.
-    </p>
-  </div>
-      <!-- Action Buttons -->
-      <div class="d-flex justify-content-center gap-3 mt-5">
-        <button
-          mat-raised-button
-          style="background-color: #084981; color: white"
-          (click)="onAddButtonClick()"
-        >
-          <mat-icon>add</mat-icon>
-          Créer un calendrier de semestre
-        </button>
+      *ngIf="!loadingSessions && dataSource.length > 0"
+      class="table-container mat-elevation-z8"
+    >
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead style="background-color: #084981; color: white;" class="table-light">
+            <tr>
+              <th>Date</th>
+              <th>Designation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of dataSource">
+              <td>{{ row.dateDebut }} à {{ row.dateFin }}</td>
+              <td>{{ row.designation }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+
+    <!-- Fallback for No Data -->
+    <div
+      *ngIf="!loadingSessions && dataSource.length === 0"
+      class="alert alert-info text-center my-5"
+    >
+      <p class="mb-0">
+        Veuillez sélectionner une année universitaire.
+      </p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-center gap-3 mt-5">
+      <button
+        mat-raised-button
+        style="background-color: #084981; color: white"
+        (click)="onAddButtonClick()"
+      >
+        <mat-icon>add</mat-icon>
+        Créer un calendrier de semestre
+      </button>
+    </div>
   </div>
+</div>
 
     <mat-stepper
       linear
@@ -175,4 +186,3 @@
         </form>
       </mat-step>
     </mat-stepper>
-</div>

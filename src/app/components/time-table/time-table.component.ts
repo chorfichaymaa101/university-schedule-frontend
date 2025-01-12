@@ -95,10 +95,10 @@ throw new Error('Method not implemented.');
 
   timeSlots = ["P1", "P2", "P3", "P4"];
   timeSlotss: { [key: string]: string } = {
-  "P1": '8-10',
-  "P2": '10-12',
-  "P3": '14-16',
-  "P4": '16-18'
+  "P1": '8h30-10h30',
+  "P2": '10h45-12h45',
+  "P3": '14h-16h',
+  "P4": '16h15-18h15'
 };
 
 

@@ -13,3 +13,8 @@ h2{
    /* overflow-y: auto;*/
     padding: 0px;
   }
+  .table th {
+    background-color: #084981;
+    font-weight: bold;
+    color: #ced4da;
+  }
