@@ -72,7 +72,9 @@
     <form [formGroup]="thirdFormGroup" (ngSubmit)="addSessionExamRow()">
       <ng-template matStepLabel>Ajouter une ligne</ng-template>
       <div class="text-center mt-3">
-
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div><br>
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Filière</mat-label>
           <mat-select formControlName="prog" required>

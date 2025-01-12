@@ -43,7 +43,7 @@ export class SemesterTableComponent implements OnInit {
   displayedColumns: string[] = ['dateDebut', 'designation'];
   dataSource: SemesterTable[] = []; 
   academicYear: string = ''; 
-  
+  errorMessage: string = '';
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -110,6 +110,7 @@ export class SemesterTableComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         console.error('Erreur lors d ajout de la ligne :', err);
+        this.errorMessage = 'Erreur lors d\'ajout de la ligne : ' + err.error;
       },
     });
   }

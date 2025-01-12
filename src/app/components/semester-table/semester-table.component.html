@@ -48,6 +48,9 @@
     <ng-template matStepLabel>Ajouter une ligne</ng-template>
     <form [formGroup]="thirdFormGroup" (ngSubmit)="addSemesterRow()">
       <div class="text-center mt-3">
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div><br>
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Date Début</mat-label>
           <input matInput [matDatepicker]="pickerStart" formControlName="dateDebut" required>

@@ -85,7 +85,7 @@ export class ExamTableComponent {
   });
 
   
-  
+  errorMessage: string = '';
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -263,6 +263,8 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
       },
       error: (err: HttpErrorResponse) => {
         console.error('Erreur lors d ajout de la ligne :', err);
+        this.errorMessage = 'Erreur lors d\'ajout de la ligne : ' + err.error; // L'erreur spécifique que vous voulez afficher
+      
       },
     });
   }

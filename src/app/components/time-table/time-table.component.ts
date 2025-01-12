@@ -98,7 +98,7 @@ export class TimeTableComponent {
   days: string[] = Object.keys(Day).filter(key => isNaN(Number(key)));
   periods: string[] = Object.keys(Time).filter(key => isNaN(Number(key)));
   types: string[] = Object.keys(SessionType).filter(key => isNaN(Number(key)));
-
+  errorMessage: string = '';
   //formulaire
   firstFormGroup = this._formBuilder.group({
     year: ['', Validators.required],
@@ -337,6 +337,7 @@ if (capacityControl && typeControl) {
       },
       error: (err: HttpErrorResponse) => {
         console.error('Erreur lors d ajout de la ligne :', err);
+        this.errorMessage = 'Erreur lors d\'ajout de la ligne : ' + err.error;
       },
     });
   }

@@ -75,6 +75,10 @@
       <ng-template matStepLabel>Ajouter une ligne</ng-template>
       
       <div class="text-center mt-3">
+        
+          <div *ngIf="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div><br>
       <mat-form-field appearance="outline" class="w-50 mb-3">
         <mat-label>Professeur</mat-label>
         <mat-select formControlName="prof" required>
