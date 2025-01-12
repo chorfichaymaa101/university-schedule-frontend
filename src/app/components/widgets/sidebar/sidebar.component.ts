@@ -39,18 +39,19 @@ export class SidebarComponent {
   {
     link: "/demanderRattrapage",
     title: "Demande Rattrapage",
-    icon: "fas fa-clipboard-list"
+    icon: "fas fa-file-alt"
+
   },
   {
     link: "/changerSeance",
     title: "Changer séance",
-    icon: "fas fa-clipboard-list"
+    icon: "fas fa-exchange-alt"
   },
 
   {
     link: "/notificationsAdmin",
     title: "Notifications",
-    icon: "fas fa-clipboard-list",
+    icon: "fas fa-bell",
     markAsChecked: true  // Add a flag for marking as checked
 
   },
@@ -58,20 +59,20 @@ export class SidebarComponent {
   {
     link: "/historiqueAdmin",
     title: "Historique",
-    icon: "fas fa-clipboard-list"
+    icon: "fas fa-history"
   },
 
   {
     link: "/notificationsProfesseur",
     title: "Notifications",
-    icon: "fas fa-clipboard-list",
+    icon: "fas fa-bell",
     markAsChecked: true  // Add a flag for marking as checked
 
   },
   {
     link: "/notificationsEtudiant",
     title: "Notifications",
-    icon: "fas fa-clipboard-list",
+    icon: "fas fa-bell",
     markAsChecked: true  // Add a flag for marking as checked
 
   },
