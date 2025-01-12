@@ -37,6 +37,8 @@ import { MatTable } from '@angular/material/table';
 import { forkJoin } from 'rxjs';
 import { Time } from 'src/app/models/time.model';
 import { SessionType } from 'src/app/models/session-type.model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 import { combineLatest } from 'rxjs';
 @Component({
@@ -44,7 +46,7 @@ import { combineLatest } from 'rxjs';
   templateUrl: './time-table.component.html',
   standalone: true,
   imports: [
-   
+
     MatGridListModule,
     MatSidenavModule,
     MatRadioModule,
@@ -61,12 +63,19 @@ import { combineLatest } from 'rxjs';
     MatSelectModule,
     CommonModule,
     MatOptionModule,
-    
+    MatProgressSpinnerModule,
+
 
   ],
   styleUrls: ['./time-table.component.css']
 })
 export class TimeTableComponent {
+updateTimetable() {
+throw new Error('Method not implemented.');
+}
+deleteTimetable() {
+throw new Error('Method not implemented.');
+}
 
   idTimeTable: number = 0;
   year: string = '';
@@ -75,6 +84,14 @@ export class TimeTableComponent {
   day: string ='';
   time: string ='';
   dataSource: any[] = [];
+
+  stepperVisible: boolean = false;
+  selectedYear: string | null = null;
+  selectedProgramId: number | null = null;
+  academicYears: string[] = [];
+  loadingSessions: boolean = false;
+  sessions: Session[] = [];
+
 
   timeSlots = ["P1", "P2", "P3", "P4"];
   timeSlotss: { [key: string]: string } = {
@@ -89,7 +106,7 @@ export class TimeTableComponent {
 
   times: string[] = ['8-10', '10-12', '14-16', '16-18'];
 
-  @ViewChild(MatTable) table!: MatTable<any>; 
+  @ViewChild(MatTable) table!: MatTable<any>;
   displayedColumns: string[] = ['day', ...Object.keys(this.timeSlotss)];
 
   persons: Person[] = [];
@@ -98,7 +115,7 @@ export class TimeTableComponent {
   days: string[] = Object.keys(Day).filter(key => isNaN(Number(key)));
   periods: string[] = Object.keys(Time).filter(key => isNaN(Number(key)));
   types: string[] = Object.keys(SessionType).filter(key => isNaN(Number(key)));
-  errorMessage: string = '';
+
   //formulaire
   firstFormGroup = this._formBuilder.group({
     year: ['', Validators.required],
@@ -128,6 +145,7 @@ export class TimeTableComponent {
 
   ngOnInit(): void {
     // Charger les programmes depuis le service
+    this.loadAcademicYears();
     this.timeTableService.getAllPrograms().subscribe(data => {
       this.programs = data;
     });
@@ -139,14 +157,14 @@ export class TimeTableComponent {
           this.sessionService.getPersonByProgram(programIdNumber).subscribe(data => {
             this.persons = data;
           });
-    
+
           this.sessionService.getModuleByProgram(programIdNumber).subscribe(data => {
             this.modules = data;
           });
         }
       }
     });
-    
+
 
     const capacityControl = this.thirdFormGroup.get('capacity');
 const typeControl = this.thirdFormGroup.get('type');
@@ -162,24 +180,55 @@ if (capacityControl && typeControl) {
     if (capacity != null && type != null) {
       const capacityNumber = +capacity;
       const typeNumber = +type;
-    
+
       console.log('Capacity Number:', capacityNumber);
       console.log('Type Number:', typeNumber);
-    
+
       // Fetch classes based on 'capacity' and 'type'
       this.sessionService.getClassByTypeCapacity(typeNumber, capacityNumber).subscribe(data => {
         console.log('Classes:', data);
         this.classes = data; // Update the classes list
       });
     }
-    
+
   });
 }
 
-    
+
+  }
+  onSelectionChange(): void {
+    if (this.selectedYear && this.selectedProgramId) {
+      this.timeTableByYearBySemester1(this.selectedProgramId, this.selectedYear);
+    }
   }
 
-  
+  loadAcademicYears(): void {
+    this.timeTableService.getAllTimeTable().subscribe({
+      next: (timeTables) => {
+        this.academicYears = [
+          ...new Set(timeTables.map((table) => table.academicYear)),
+        ]; // Extract unique academic years
+      },
+      error: (err) => console.error('Error fetching academic years:', err),
+    });
+  }
+  transformTimetableData(timetable: any[]): any[] {
+    const transformedData: any[] = [];
+    this.dayNames.forEach((day) => {
+      const dayRow: any = { day };
+      this.timeSlots.forEach((slot) => {
+        // Find session for the current day and slot
+        const session = timetable.find((s: any) => s.day === day && s.time === slot);
+        dayRow[slot] = session || null; // Assign session or null for empty slots
+      });
+      transformedData.push(dayRow);
+    });
+    return transformedData;
+  }
+
+
+
+
 
   timeTableByYearBySemester(programId: number, year: string): void {
     this.timeTableService.checkIfExists(programId, year).subscribe({
@@ -192,8 +241,8 @@ if (capacityControl && typeControl) {
           };
           this.timeTableService.savetimeTable(newTimeTable).subscribe({
             next: (timeTable: TimeTable) => {
-              this.idTimeTable = timeTable.id; // Utiliser l'ID généré par le backend
-              this.loadSessions(timeTable.id);  // Charger les sessions
+              this.idTimeTable = newTimeTable.id;
+              this.loadSessions(newTimeTable.id);  // Charger les sessions
             },
             error: (err: HttpErrorResponse) => {
               console.error('Erreur de sauvegarde de l\'emploi du temps:', err);
@@ -216,7 +265,43 @@ if (capacityControl && typeControl) {
       }
     });
   }
-  
+  timeTableByYearBySemester1(programId: number, year: string): void {
+    this.timeTableService.checkIfExists(programId, year).subscribe({
+      next: (exist: boolean) => {
+        if (!exist) {
+          const newTimeTable: TimeTable = {
+            id: 0,
+            academicYear: year,
+            programId: programId,
+          };
+          this.timeTableService.savetimeTable(newTimeTable).subscribe({
+            next: (timeTable: TimeTable) => {
+              this.idTimeTable = newTimeTable.id;
+              this.loadSessions1(newTimeTable.id);  // Charger les sessions
+            },
+            error: (err: HttpErrorResponse) => {
+              console.error('Erreur de sauvegarde de l\'emploi du temps:', err);
+            }
+          });
+        } else {
+          this.timeTableService.gettimeTableBySemseterYear(programId, year).subscribe({
+            next: (timeTable: TimeTable) => {
+              this.idTimeTable = timeTable.id;
+              this.loadSessions1(timeTable.id);  // Charger les sessions
+            },
+            error: (err: HttpErrorResponse) => {
+              console.error('Erreur de récupération de l\'emploi du temps existant:', err);
+            }
+          });
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Erreur lors de la vérification de l\'emploi du temps:', err);
+      }
+    });
+  }
+
+
   loadSessions(timeTableId: number): void {
     this.dataSource = [];
     this.dayNames.forEach((day) => {
@@ -233,8 +318,27 @@ if (capacityControl && typeControl) {
         });
       });
     });
+
   }
-  
+  loadSessions1(timeTableId: number): void {
+    this.dayNames.forEach((day) => {
+      this.timeSlots.forEach((slot) => {
+        this.sessionService.getSessionByTimeTableByDayByTime(timeTableId, day, slot).subscribe({
+          next: (res: Session) => {
+            if (res) {
+              this.processSessionExams(res, day, slot);
+            }
+          },
+          error: (err: HttpErrorResponse) => {
+            console.error('Erreur de récupération de session:', err);
+          }
+        });
+      });
+    });
+    this.dataSource = this.transformTimetableData(this.sessions);
+
+  }
+
 
 
   processSessionExams(session: SessionWithDetails, day: string, slot: string): void {
@@ -266,6 +370,7 @@ if (capacityControl && typeControl) {
         } else {
           let newRow = { day, [slot]: sessionWithDetails };
           this.dataSource.push(newRow);
+
         }
 
         // Tri des données en fonction de l'ordre des jours dans 'dayNames'
@@ -285,16 +390,14 @@ if (capacityControl && typeControl) {
         console.error('Erreur lors de la récupération des détails:', err);
       }
     });
-}
+  }
 
 
-  
-  
+
   onYearSubmit(): void {
     const yearValue = this.firstFormGroup.get('year')?.value?.trim();
     const progValue = Number(this.firstFormGroup.get('prog')?.value) || 0;
     if (yearValue && progValue) {
-      this.dataSource = [];
       this.programId = progValue;
       this.timeTableByYearBySemester(progValue, yearValue);
       console.log('Les données sont bien récupéré');
@@ -316,19 +419,19 @@ if (capacityControl && typeControl) {
     const newRow: Session = {
       id: 0,
       professorId: Number(this.thirdFormGroup.get('prof')?.value) || 0,
-      
+
       moduleId: Number(this.thirdFormGroup.get('module')?.value) || 0,
       day: this.thirdFormGroup.get('day')?.value?.trim() ?? '',
 
       time: this.thirdFormGroup.get('time')?.value?.trim() ?? '',
       classId: Number(this.thirdFormGroup.get('classe')?.value) || 0,
-      
+
       sessionType: this.types[selectedIndex],
       timetableId: this.idTimeTable,
       capacity: Number(this.thirdFormGroup.get('capacity')?.value),
       groupe: this.thirdFormGroup.get('capacity')?.value?.trim() ?? '',
     };
-  
+
     this.sessionService.savesession(newRow).subscribe({
       next: (res: Session) => {
         console.log('Nouvelle ligne ajoutée :', res);
@@ -337,7 +440,6 @@ if (capacityControl && typeControl) {
       },
       error: (err: HttpErrorResponse) => {
         console.error('Erreur lors d ajout de la ligne :', err);
-        this.errorMessage = 'Erreur lors d\'ajout de la ligne : ' + err.error;
       },
     });
   }

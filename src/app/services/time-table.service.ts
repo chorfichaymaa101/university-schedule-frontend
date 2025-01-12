@@ -10,7 +10,7 @@ import {environment} from "../../environments/environment";
 })
 export class TimeTableService {
 
-  
+
 
   constructor(private httpClient: HttpClient ) { }
 
@@ -22,12 +22,16 @@ export class TimeTableService {
     return this.httpClient.get<TimeTable>(`${environment.backendHost}/timetable/${programId}/${academicYear}`);
   }
 
-  
+
   public checkIfExists(programId: number, academicYear: string) {
     return this.httpClient.get<boolean>(`${environment.backendHost}/counttimeTable/${programId}/${academicYear}`)
   }
 
   public getAllPrograms( ): Observable<Program[]>{
         return this.httpClient.get<Program[]>(`${environment.backendHost}/programs`)
-      }
+  }
+
+public getAllTimeTable(): Observable<TimeTable[]>{
+  return this.httpClient.get<TimeTable[]>(`${environment.backendHost}/timetable`)
+}
 }

@@ -56,6 +56,12 @@ export class ExamTableComponent {
   year: string = '';
   semester: string = '';
   dataSource: SessionExamWithDetails[] = [];
+  stepperVisible=false
+  selectedYear: string | null = null;
+  selectedSemester: string | null = null;
+  academicYears: string[] = [];
+  semesters: string[] = [];
+  loadingSessions: boolean = false;
 
   programs: Program[] = [];
   persons: Person[] = [];
@@ -134,6 +140,34 @@ this.thirdFormGroup.get('capacity')?.valueChanges.subscribe(capacity => {
     }
   }
 });
+  }
+
+  onSelectionChange(): void {
+    if (this.selectedYear && this.selectedSemester) {
+      this.examTableByYearBySemester(this.selectedSemester, this.selectedYear);
+    }
+  }
+
+  loadAcademicYears(): void {
+    this.examTableService.getAllExamTable().subscribe({
+      next: (examtables) => {
+        this.academicYears = [
+          ...new Set(examtables.map((table) => table.academicYear)),
+        ]; // Extract unique academic years
+      },
+      error: (err) => console.error('Error fetching academic years:', err),
+    });
+  }
+
+  loadSemesters(): void {
+    this.examTableService.getAllExamTable().subscribe({
+      next: (examtables) => {
+        this.semesters = [
+          ...new Set(examtables.map((table) => table.semester)),
+        ]; // Extract unique semesters
+      },
+      error: (err) => console.error('Error semsesters:', err),
+    });
   }
 
   examTableByYearBySemester(semester: string, year: string): void {

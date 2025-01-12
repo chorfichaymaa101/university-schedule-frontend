@@ -1,52 +1,179 @@
-
 <h2>Emploi du temps</h2>
-<mat-stepper linear #stepper class="scrollable-stepper">
 
+<div class="container mt-4">
+  <div *ngIf="!stepperVisible" class="text-center mt-3">
+
+
+    <!-- Dropdown Section -->
+    <div class="dropdowns row justify-content-center mb-4">
+      <div class="col-6 col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Année universitaire</mat-label>
+          <mat-select
+            [(ngModel)]="selectedYear"
+            (selectionChange)="onSelectionChange()"
+          >
+            <mat-option *ngFor="let year of academicYears" [value]="year">{{
+              year
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Filière</mat-label>
+          <mat-select
+            [(ngModel)]="selectedProgramId"
+            (selectionChange)="onSelectionChange()"
+          >
+            <mat-option *ngFor="let program of programs" [value]="program.id">
+              {{ program.programName }} {{ program.semester }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loadingSessions" class="text-center">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Chargement en cours...</p>
+    </div>
+
+    <!-- Timetable Display -->
+    <div
+      *ngIf="!loadingSessions && dataSource.length > 0"
+      class="table-container mat-elevation-z8"
+    >
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead style="background-color: #084981; color: white;" class="table-light">
+            <tr>
+              <th>Jour</th>
+              <th *ngFor="let slot of displayedColumns.slice(1)">
+                {{ timeSlotss[slot] }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of dataSource">
+              <td>{{ row.day }}</td>
+              <td *ngFor="let slot of displayedColumns.slice(1)">
+                <div *ngIf="row[slot]">
+                  <div class="fw-bold">{{ row[slot].moduleName }}</div>
+                  <div>{{ row[slot].sessionType }}</div>
+                  <div>{{ row[slot].professorName }}</div>
+                  <div>{{ row[slot].className }}</div>
+                  <div>{{ row[slot].groupe }}</div>
+                </div>
+                <div *ngIf="!row[slot]">
+                  <p>*************</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fallback for No Data -->
+    <div
+      *ngIf="!loadingSessions && dataSource.length === 0"
+      class="alert alert-info text-center my-5"
+    >
+      <p class="mb-0">
+        Veuillez sélectionner une filière et
+        une année universitaire.
+      </p>
+    </div>
+    <!-- Action Buttons -->
+  <div class="d-flex justify-content-center gap-3 mt-5">
+    <button mat-raised-button
+    style="background-color: #084981; color: white;"
+      (click)="stepperVisible = true"
+    >
+      <mat-icon>add</mat-icon>
+      Créer un emploi du temps
+    </button>
+    <button mat-raised-button
+    style="background-color: #084981; color: white;"
+      (click)="deleteTimetable()"
+    >
+      <mat-icon>delete</mat-icon>
+      Supprimer
+    </button>
+    <button mat-raised-button
+    style="background-color: #084981; color: white;"
+      (click)="updateTimetable()"
+    >
+      <mat-icon>edit</mat-icon>
+      Mettre à jour
+    </button>
+  </div>
+  </div>
+
+</div>
+
+<mat-stepper linear #stepper class="scrollable-stepper" *ngIf="stepperVisible">
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup" (ngSubmit)="onYearSubmit()">
-      <ng-template matStepLabel>Information de l'emploi des examens</ng-template>
+      <ng-template matStepLabel
+        >Information de l'emploi des examens</ng-template
+      >
       <div class="text-center mt-3">
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Année universitaire</mat-label>
-          <input matInput placeholder="Année Universitaire" formControlName="year" required>
-        </mat-form-field><br>
+          <input
+            matInput
+            placeholder="Année Universitaire"
+            formControlName="year"
+            required
+          /> </mat-form-field
+        ><br />
         <mat-form-field appearance="outline" class="w-50 mb-3">
-            <mat-label>Filière</mat-label>
-            <mat-select formControlName="prog" required>
-              <mat-option>--</mat-option>
-              <mat-option *ngFor="let program of programs" [value]="program.id">
-                {{program.programName}} {{program.semester}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field><br>
+          <mat-label>Filière</mat-label>
+          <mat-select formControlName="prog" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let program of programs" [value]="program.id">
+              {{ program.programName }} {{ program.semester }}
+            </mat-option>
+          </mat-select> </mat-form-field
+        ><br />
       </div>
       <div class="text-center mt-3">
-        <button mat-raised-button color="primary" matStepperNext>Continuer</button>
+        <button mat-raised-button color="primary" matStepperNext>
+          Continuer
+        </button>
       </div>
     </form>
   </mat-step>
 
   <mat-step [stepControl]="secondFormGroup">
     <ng-template matStepLabel>Emploi du temps</ng-template>
-  
+
     <div class="text-center mt-3">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    
         <!-- Jour -->
         <ng-container matColumnDef="day">
-          <th mat-header-cell *matHeaderCellDef>  </th>
+          <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row" class="thData">{{ row.day }}</td>
         </ng-container>
-    
+
         <!-- Périodes horaires -->
-        <ng-container *ngFor="let slot of displayedColumns.slice(1)" [matColumnDef]="slot">
-          <th mat-header-cell *matHeaderCellDef class="thData"> {{ timeSlotss[slot] }} </th>
+        <ng-container
+          *ngFor="let slot of displayedColumns.slice(1)"
+          [matColumnDef]="slot"
+        >
+          <th mat-header-cell *matHeaderCellDef class="thData">
+            {{ timeSlotss[slot] }}
+          </th>
           <td mat-cell *matCellDef="let element" id="tdData">
             <div *ngIf="element[slot]">
-              {{ element[slot].moduleName }}<br>
-              {{ element[slot].sessionType }}<br>
-              {{ element[slot].professorName }}<br>
-              {{ element[slot].className }}<br>
+              {{ element[slot].moduleName }}<br />
+              {{ element[slot].sessionType }}<br />
+              {{ element[slot].professorName }}<br />
+              {{ element[slot].className }}<br />
               {{ element[slot].groupe }}
             </div>
             <!-- Affichage si aucune session n'est trouvée -->
@@ -55,31 +182,31 @@
             </div>
           </td>
         </ng-container>
-    
+
         <!-- Lignes -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
     <form [formGroup]="secondFormGroup">
       <div class="text-center mt-3">
         <button mat-raised-button class="m-2" matStepperPrevious>Retour</button>
-        <button mat-raised-button color="primary" matStepperNext>Continuer</button>
+        <button mat-raised-button color="primary" matStepperNext>
+          Continuer
+        </button>
       </div>
     </form>
   </mat-step>
-  
-  
+
   <mat-step [stepControl]="thirdFormGroup">
     <form [formGroup]="thirdFormGroup" (ngSubmit)="addSessionExamRow()">
       <ng-template matStepLabel>Ajouter une ligne</ng-template>
-      
+
       <div class="text-center mt-3">
-        
-          <div *ngIf="errorMessage" class="error-message">
-            {{ errorMessage }}
-          </div><br>
-      <mat-form-field appearance="outline" class="w-50 mb-3">
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div><br>
+        <mat-form-field appearance="outline" class="w-50 mb-3">
         <mat-label>Professeur</mat-label>
         <mat-select formControlName="prof" required>
           <mat-option>--</mat-option>
@@ -89,73 +216,77 @@
         </mat-select>
       </mat-form-field><br>
 
-      <mat-form-field appearance="outline" class="w-50 mb-3">
+        <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Module</mat-label>
           <mat-select formControlName="module" required>
             <mat-option>--</mat-option>
             <mat-option *ngFor="let module of modules" [value]="module.id">
-              {{module.moduleName}}
+              {{ module.moduleName }}
             </mat-option>
-          </mat-select>
-      </mat-form-field><br>
+          </mat-select> </mat-form-field
+        ><br />
 
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Jour</mat-label>
           <mat-select formControlName="day" required>
             <mat-option>--</mat-option>
             <mat-option *ngFor="let day of days" [value]="day">
-              {{day}}
+              {{ day }}
             </mat-option>
-          </mat-select>
-        </mat-form-field><br>
+          </mat-select> </mat-form-field
+        ><br />
 
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Période</mat-label>
           <mat-select formControlName="time" required>
             <mat-option>--</mat-option>
             <mat-option *ngFor="let period of periods" [value]="period">
-              {{period}}
+              {{ period }}
             </mat-option>
-          </mat-select>
-        </mat-form-field><br>
+          </mat-select> </mat-form-field
+        ><br />
 
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Type</mat-label>
           <mat-select formControlName="type" required>
             <mat-option>--</mat-option>
             <mat-option *ngFor="let type of types; let i = index" [value]="i">
-              {{type}}
+              {{ type }}
             </mat-option>
-            
-          </mat-select>
-        </mat-form-field><br>
+          </mat-select> </mat-form-field
+        ><br />
 
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Groupe</mat-label>
-          <input matInput formControlName="groupe" required />
-        </mat-form-field><br>
+          <input matInput formControlName="groupe" required /> </mat-form-field
+        ><br />
 
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Capacité</mat-label>
-          <input matInput formControlName="capacity" required />
-        </mat-form-field><br>
+          <input
+            matInput
+            formControlName="capacity"
+            required
+          /> </mat-form-field
+        ><br />
 
         <mat-form-field appearance="outline" class="w-50 mb-3">
           <mat-label>Classe</mat-label>
           <mat-select formControlName="classe" required>
             <mat-option>--</mat-option>
             <mat-option *ngFor="let classe of classes" [value]="classe.id">
-              {{classe.classname}}
+              {{ classe.classname }}
             </mat-option>
-          </mat-select>
-        </mat-form-field><br>
+          </mat-select> </mat-form-field
+        ><br />
       </div>
 
       <div class="text-center mt-3">
         <button mat-raised-button class="m-2" matStepperPrevious>Retour</button>
-        <button mat-raised-button color="primary" matStepperNext>Ajouter</button>
+        <button mat-raised-button color="primary" matStepperNext>
+          Ajouter
+        </button>
       </div>
-
     </form>
-</mat-step>
+  </mat-step>
 </mat-stepper>
