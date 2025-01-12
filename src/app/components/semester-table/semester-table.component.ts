@@ -44,11 +44,17 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./semester-table.component.css'],
 })
 export class SemesterTableComponent implements OnInit {
+deleteTable() {
+throw new Error('Method not implemented.');
+}
+updateTable() {
+throw new Error('Method not implemented.');
+}
 
 
   displayedColumns: string[] = ['dateDebut', 'designation'];
-  dataSource: SemesterTable[] = []; 
-  academicYear: string = ''; 
+  dataSource: SemesterTable[] = [];
+  academicYear: string = '';
   selectedYear: string | null = null;
   academicYears: string[] = [];
   stepperVisible: boolean = false;
