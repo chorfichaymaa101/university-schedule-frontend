@@ -27,6 +27,7 @@ import { Class } from 'src/app/models//class.model';
 import { CommonModule } from '@angular/common';
 import { MatOptionModule } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-exam-table',
   standalone: true,
@@ -69,7 +70,7 @@ throw new Error('Method not implemented.');
   academicYears: string[] = [];
   semesters: string[] = [];
   loadingSessions: boolean = false;
-
+  public role: string = "";
   programs: Program[] = [];
   persons: Person[] = [];
   modules: Module[] = [];
@@ -104,13 +105,16 @@ throw new Error('Method not implemented.');
     private _formBuilder: FormBuilder,
     private examTableService: ExamTableService,
     private sessionService: SessionExamService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
   // Charger les programmes depuis le service
   this.loadAcademicYears();
   this.loadSemesters();
+  this.role = this.cookieService.get('role');
+  console.log('User role:', this.role);
 
   this.firstFormGroup.get('semester')?.valueChanges.subscribe(semester => {
     if (semester) {

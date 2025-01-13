@@ -41,6 +41,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-time-table',
   templateUrl: './time-table.component.html',
@@ -84,7 +85,7 @@ throw new Error('Method not implemented.');
   day: string ='';
   time: string ='';
   dataSource: any[] = [];
-
+  public role: string = "";
   stepperVisible: boolean = false;
   selectedYear: string | null = null;
   selectedProgramId: number | null = null;
@@ -141,11 +142,14 @@ throw new Error('Method not implemented.');
     private _formBuilder: FormBuilder,
     private timeTableService: TimeTableService,
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
     // Charger les programmes depuis le service
+    this.role = this.cookieService.get('role');
+    console.log('User role:', this.role);
     this.loadAcademicYears();
     this.timeTableService.getAllPrograms().subscribe(data => {
       this.programs = data;

@@ -30,6 +30,16 @@
       </mat-form-field>
     </div>
   </div>
+   <!-- Fallback for No Data -->
+   <div
+   *ngIf="!loadingSessions && dataSource.length === 0"
+   class=" text-center my-5"
+ >
+   <p class="mb-0">
+     Veuillez sélectionner un semestre et une année universitaire.
+   </p>
+ </div>
+ <!-- Action Buttons -->
   <div class="text-center mt-3">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="prof">
@@ -68,18 +78,10 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
   </div>
-  <!-- Fallback for No Data -->
-  <div
-    *ngIf="!loadingSessions && dataSource.length === 0"
-    class="alert alert-info text-center my-5"
-  >
-    <p class="mb-0">
-      Veuillez sélectionner un semestre et une année universitaire.
-    </p>
-  </div>
-  <!-- Action Buttons -->
+ 
   <div class="d-flex justify-content-center gap-3 mt-5">
     <button
+    *ngIf="role === 'ADMIN'"
       mat-raised-button
       style="background-color: #084981; color: white"
       (click)="stepperVisible = true"
@@ -87,7 +89,9 @@
       <mat-icon>add</mat-icon>
       Créer un calendrier d'exam
     </button>
+
     <button mat-raised-button
+    *ngIf="role === 'ADMIN'"
     style="background-color: #084981; color: white;"
       (click)="deleteTable()"
     >
@@ -95,6 +99,7 @@
       Supprimer
     </button>
     <button mat-raised-button
+    *ngIf="role === 'ADMIN'"
     style="background-color: #084981; color: white;"
     (click)="navigateToEditPage()">
   <mat-icon>edit</mat-icon>

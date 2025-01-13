@@ -1,5 +1,37 @@
-.home {
-    width: 50%;
+#home {
+    width: 450px;
+   
+}
+button {
+    background-color: #084981; 
+    color: white;
+    width: 400px;
+    height: 150px;
+    border-radius: 15px;
+    border: none; /* Supprime la bordure */
+    outline: none; /* Supprime le contour */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+button:hover {
+    transform: scale(1.05); /* Légère mise en avant */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Ajoute une ombre au survol */
+}
+#b1{
+    background-color: #608BC1; 
+    
+}
+#b2{
+    background-color: #155E95; 
+    
+}
+#b3{
+    background-color: #CBDCEB; 
     
 }
 
+h2{
+    color: white;
+}
+h4{
+    color: white;
+}

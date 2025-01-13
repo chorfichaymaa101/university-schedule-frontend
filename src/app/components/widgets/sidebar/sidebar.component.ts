@@ -37,27 +37,27 @@ export class SidebarComponent {
     {
       link: '/admins',
       title: 'Administrateurs',
-      icon: 'fas fa-add'
+      icon: 'fa-solid fa-user-tie'
     },
     {
       link: '/profs',
       title: 'Professeurs',
-      icon: 'fas fa-add'
+      icon: 'fa-solid fa-chalkboard-user'
     },
     {
       link: '/modules',
       title: 'Modules',
-      icon: 'fas fa-add'
+      icon: 'fa-solid fa-book'
     },
     {
       link: '/classes',
       title: 'Classes',
-      icon: 'fas fa-add'
+      icon: 'fa-solid fa-school'
     },
     {
       link: '/programs',
       title: 'Fillieres',
-      icon: 'fas fa-add'
+      icon: 'fa-solid fa-bookmark'
     },
 
   {

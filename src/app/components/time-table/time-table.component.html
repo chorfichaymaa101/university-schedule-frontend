@@ -34,7 +34,17 @@
         </mat-form-field>
       </div>
     </div>
-
+<!-- Fallback for No Data -->
+<div
+*ngIf="!loadingSessions && dataSource.length === 0"
+class="text-center my-5"
+>
+<p class="mb-0">
+  Veuillez sélectionner une filière et
+  une année universitaire.
+</p>
+</div>
+<!-- Action Buttons -->
     <!-- Loading Spinner -->
     <div *ngIf="loadingSessions" class="text-center">
       <mat-spinner diameter="50"></mat-spinner>
@@ -77,19 +87,10 @@
       </div>
     </div>
 
-    <!-- Fallback for No Data -->
-    <div
-      *ngIf="!loadingSessions && dataSource.length === 0"
-      class="alert alert-info text-center my-5"
-    >
-      <p class="mb-0">
-        Veuillez sélectionner une filière et
-        une année universitaire.
-      </p>
-    </div>
-    <!-- Action Buttons -->
+    
   <div class="d-flex justify-content-center gap-3 mt-5">
     <button mat-raised-button
+    *ngIf="role === 'ADMIN'"
     style="background-color: #084981; color: white;"
       (click)="stepperVisible = true"
     >
@@ -97,6 +98,7 @@
       Créer un emploi du temps
     </button>
     <button mat-raised-button
+    *ngIf="role === 'ADMIN'"
     style="background-color: #084981; color: white;"
       (click)="deleteTimetable()"
     >
@@ -104,6 +106,7 @@
       Supprimer
     </button>
     <button mat-raised-button
+    *ngIf="role === 'ADMIN'"
     style="background-color: #084981; color: white;"
     (click)="navigateToEditPage()">
   <mat-icon>edit</mat-icon>

@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-semester-table',
   standalone: true,
@@ -60,7 +60,7 @@ navigateToEditPage(): void {
   stepperVisible: boolean = false;
   loadingSessions: boolean = false;
   errorMessage: string = '';
-
+  public role: string = "";
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -78,11 +78,14 @@ navigateToEditPage(): void {
   constructor(
     private _formBuilder: FormBuilder,
     private semesterTableService: SemesterTableService,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
     this.loadAcademicYears();
+    this.role = this.cookieService.get('role'); // Assurez-vous que ce cookie est bien défini
+    console.log('User role:', this.role);
   }
   onAddButtonClick(): void {
     this.stepperVisible = true;
