@@ -12,8 +12,8 @@
       <h2>Demander Rattrapage</h2>
       <img src="/assets/img/icons/calendrier.png" alt="Icon" class="header-icon" />
     </div>
+    
   
-    <!-- Container for Filière, Semestre, Module -->
     <div class="info-container">
       <h3>Informations sur le Cours</h3>
       <div>
@@ -51,8 +51,11 @@
     <div class="details-container">
       <h3>Détails de la séance</h3>
       <div>
-        <label for="professorId">Professor ID</label>
-        <input class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="professorId" name="professorId" type="number" ngModel required />
+        <input class="mat-mdc-form-field-infix ng-tns-c926814666-1" 
+        id="professorId" 
+        name="professorId" 
+        type="hidden" 
+        [value]="userId" />
       </div>
   
       <div>

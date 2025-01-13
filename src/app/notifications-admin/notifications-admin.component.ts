@@ -4,6 +4,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';  // Import FormsModule
 
+import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/services/auth.service';
+
 interface Class {
   id: number;
   classname: string;
@@ -25,13 +29,23 @@ export class NotificationsAdminComponent implements OnInit {
 
   classes: Class[] = [];  // Initialize to an empty array
 
+  
+  public username: string = "";
+  public userId: number = 0;
+  public role: string = "";
 
-  constructor(private http: HttpClient) {}
+  constructor(private cookieService: CookieService,private http: HttpClient, private route: ActivatedRoute, private authService: AuthService ) {}
 
   ngOnInit(): void {
     this.fetchNotifications();
     this.fetchClasses(); 
 
+
+    
+    this.username = this.cookieService.get('username');
+    this.userId = +this.cookieService.get('userId'); // Convert to number
+    this.role = this.cookieService.get('role');
+ 
   }
 
   fetchNotifications() {

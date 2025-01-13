@@ -6,6 +6,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/services/auth.service';
+
 interface Module {
   id: number;
   moduleName: string;
@@ -40,7 +44,13 @@ export class ProfModifierSeanceComponent implements OnInit {
   semesters: Semester[] = [];  // Initialize to an empty array
   classes: Class[] = [];  // Initialize to an empty array
 
-  constructor(private http: HttpClient) {}
+  
+  public username: string = "";
+  public userId: number = 0;
+  public role: string = "";
+  
+
+  constructor(private cookieService: CookieService,private http: HttpClient, private route: ActivatedRoute, private authService: AuthService) {}
 
   async ngOnInit() {
     await this.fetchModules(); 
@@ -48,6 +58,11 @@ export class ProfModifierSeanceComponent implements OnInit {
     await this.fetchSemesters(); 
     await this.fetchClasses(); 
 
+    
+    this.username = this.cookieService.get('username');
+    this.userId = +this.cookieService.get('userId'); // Convert to number
+    this.role = this.cookieService.get('role');
+ 
   }
 
   async fetchModules() {
@@ -104,7 +119,7 @@ export class ProfModifierSeanceComponent implements OnInit {
       console.log('Selected Semester ID:', formData.semesterId);
 
       const requestData = {
-        professorId: formData.professorId,                
+        professorId: this.userId,                
         moduleId: Number(formData.moduleId),            
         programId: Number(formData.programId), 
         semesterId: Number(formData.semesterId),              
