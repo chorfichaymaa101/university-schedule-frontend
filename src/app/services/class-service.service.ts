@@ -24,7 +24,7 @@ export class ClassServiceService {
         }
           
     public updateClass(id: number,Class: Class): Observable<HttpResponse<string>> {
-      return this.http.put<string>(environment.backendHost + this.url +id, Class, {
+      return this.http.put<string>(environment.backendHost + this.url +'/'+id, Class, {
         responseType: 'text' as 'json',
         observe: 'response' 
       });
@@ -37,7 +37,7 @@ export class ClassServiceService {
       
       
     public deleteClass(id: number): Observable<HttpResponse<string>> {
-      return this.http.delete<string>(environment.backendHost+this.url+ id, {
+      return this.http.delete<string>(environment.backendHost+this.url+'/'+ id, {
         responseType: 'text' as 'json',
         observe: 'response' 
       });
