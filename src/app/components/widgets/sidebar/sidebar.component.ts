@@ -33,8 +33,32 @@ export class SidebarComponent {
       link: 'examTable',
       title: 'Calendrier des Examens',
       icon: 'fas fa-regular fa-calendar-check'
-    }
-    ,
+    },
+    {
+      link: '/admins',
+      title: 'Administrateurs',
+      icon: 'fas fa-add'
+    },
+    {
+      link: '/profs',
+      title: 'Professeurs',
+      icon: 'fas fa-add'
+    },
+    {
+      link: '/modules',
+      title: 'Modules',
+      icon: 'fas fa-add'
+    },
+    {
+      link: '/classes',
+      title: 'Classes',
+      icon: 'fas fa-add'
+    },
+    {
+      link: '/programs',
+      title: 'Fillieres',
+      icon: 'fas fa-add'
+    },
 
   {
     link: "/demanderRattrapage",
