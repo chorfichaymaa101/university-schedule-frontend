@@ -85,7 +85,7 @@ export class SidebarComponent {
   setSidebarItems(): void {
     if (this.role === 'ADMIN') {
       this.sidebarItems = this.sidebarAdminItems;
-    } else if (this.role === 'PROFESSOR') {
+    } else if (this.role === 'PROF') {
       this.sidebarItems = this.sidebarProfessorItems;
     } else if (this.role === 'STUDENT') {
       this.sidebarItems = this.sidebarStudentItems;
