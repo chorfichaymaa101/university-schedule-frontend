@@ -16,9 +16,10 @@ export class NavbarComponent implements OnInit {
 // constructor(private router:Router) {}
 
 ngOnInit() {
-  this.username = this.cookieService.get('username');
+   this.username = this.cookieService.get('username');
    this.userId = +this.cookieService.get('userId');
    this.role = this.cookieService.get('role');
+   console.log("f",this.cookieService.get('userId'));
   // Use the stored values as needed
 }
 

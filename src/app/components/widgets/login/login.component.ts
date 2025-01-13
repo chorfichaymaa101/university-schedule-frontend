@@ -88,7 +88,8 @@ export class LoginComponent implements OnInit {
           this.authService.loggedIn = true;
         
           this.cookieService.set('username', payload?.name);
-          this.cookieService.set('userId', payload?.id);
+          this.cookieService.set('userId', payload?.sub);
+
           let role = payload?.role;
           this.cookieService.set('role', role);
 

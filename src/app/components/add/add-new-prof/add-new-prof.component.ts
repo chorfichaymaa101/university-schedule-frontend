@@ -36,8 +36,8 @@ export class AddNewProfComponent {
   
   constructor(private fb: FormBuilder,private programService : ProgramServiceService,private profService : ProfServiceService, private router:Router) {}
 
-  ngOnInit(): void {
-    this.fetch();
+    async ngOnInit() {
+    await this.fetch();
     this.newProfFormGroup = this.fb.group({
       name: this.fb.control(null),
       email: this.fb.control(null),
