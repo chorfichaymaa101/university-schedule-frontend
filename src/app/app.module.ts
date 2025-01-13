@@ -39,10 +39,6 @@ import { SemesterTableEditComponent } from './components/semester-table-edit/sem
 import { ExamTableEditComponent } from './components/exam-table-edit/exam-table-edit.component';
 import { TimeTableEditComponent } from './components/time-table-edit/time-table-edit.component';
 import {MatButtonModule} from "@angular/material/button";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatTableModule} from "@angular/material/table";
 //import { ModifySemesterComponent } from './components/modify-semester/modify-semester.component';
@@ -102,10 +98,6 @@ import {MatTableModule} from "@angular/material/table";
     ExamTableEditComponent,
     TimeTableEditComponent,
     MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
     MatStepperModule,
     MatTableModule,
   ],

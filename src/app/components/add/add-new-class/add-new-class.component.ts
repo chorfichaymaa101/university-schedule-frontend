@@ -14,7 +14,7 @@ import { Class } from 'src/app/models/class.model';
   styleUrls: ['./add-new-class.component.css']
 })
 export class AddNewClassComponent {
-  typeList: string[] = ["Amphi", "Salle", "Tp"];
+  typeList: string[] = ["Amphi", "Salle", "TP"];
   nameFormControl = new FormControl('', [Validators.required]);
   capacityFormControl = new FormControl(0, [Validators.required]);
   typeFormControl = new FormControl('', [Validators.required]);
