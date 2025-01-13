@@ -27,7 +27,7 @@ import {TimeTableEditComponent} from "./components/time-table-edit/time-table-ed
 import { GestionProfComponent } from './components/gestion/gestion-prof/gestion-prof.component';
 
 import { GestionProgramComponent } from './components/gestion/gestion-program/gestion-program.component';
-
+/*
 import { EditProgramComponent } from './components/edit/edit-program/edit-program.component';
 import { AddNewProgramComponent } from './components/add/add-new-program/add-new-program.component';
 import { EditProfComponent } from './components/edit/edit-prof/edit-prof.component';
@@ -42,6 +42,7 @@ import { GestionAdminComponent } from './components/gestion/gestion-admin/gestio
 import { EditAdminComponent } from './components/edit/edit-admin/edit-admin.component';
 import { AddNewAdminComponent } from './components/add/add-new-admin/add-new-admin.component';
 
+*/
 const routes: Routes = [
   { path :'' , component: HomeComponent},
   { path: 'semesterTable',component: SemesterTableComponent},
@@ -60,6 +61,7 @@ const routes: Routes = [
   { path :'home' , component: HomeComponent},
   { path :'profs' , component: GestionProfComponent},
   { path :'programs' , component: GestionProgramComponent},
+  /*
   { path :'programs/edit' , component: EditProgramComponent},
  
   { path :'programs/add' , component: AddNewProgramComponent},
@@ -72,7 +74,7 @@ const routes: Routes = [
   { path :'admins' , component: GestionAdminComponent},
   { path :'admins/edit' , component: EditAdminComponent},
   { path :'admins/add' , component: AddNewAdminComponent},
-  
+  */
     // not-found
     { path :'**' , component: NotFoundComponent},
 ];

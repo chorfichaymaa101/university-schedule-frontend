@@ -26,7 +26,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatTableModule} from "@angular/material/table";
 
-import { EditProgramComponent } from './components/edit/edit-program/edit-program.component';
+//import { EditProgramComponent } from './components/edit/edit-program/edit-program.component';
 import { GestionProgramComponent } from './components/gestion/gestion-program/gestion-program.component';
 import { GestionProfComponent } from './components/gestion/gestion-prof/gestion-prof.component';
 
@@ -42,7 +42,7 @@ import { SignupComponent } from './components/widgets/signup/signup.component';
     NavbarComponent,
     FooterComponent,
     //PageHeaderComponent,
-    EditProgramComponent,
+    //EditProgramComponent,
     NotFoundComponent,
     GestionProgramComponent,
     GestionProfComponent,
