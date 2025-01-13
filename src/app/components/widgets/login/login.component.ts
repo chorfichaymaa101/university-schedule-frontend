@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
         }
           Swal.fire('Success', 'You are now logged in!', 'success');
           this.ngZone.run(() => {
-            this.router.navigate(['/profs']).then(() => {
+            this.router.navigate(['']).then(() => {
               window.location.reload();
             });
           });

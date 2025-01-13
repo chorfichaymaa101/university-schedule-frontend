@@ -7,4 +7,6 @@
   .sidebar-menu a span.active {
     font-size: 18px; 
   }
-  
+  #sidebar{
+    overflow-y: auto; 
+  }
