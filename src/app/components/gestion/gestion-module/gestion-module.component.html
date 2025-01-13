@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card card-table">
+      <div class="card-body">
+        <div class="page-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="page-title">Modules</h3>
+            </div>
+            <div class="col-auto text-end float-end ms-auto download-grp">
+              <a routerLink="/modules/add" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table
+            class="table border-0 star-student table-hover table-center mb-0 datatable table-striped"
+          >
+            <thead class="student-thread">
+              <tr>
+                <th>Nom</th>
+                <th class="text-end">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let module of modules">
+                <td>
+                  <div class="form-check check-tables">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value="something"
+                    />
+                  </div>
+                </td>
+                <td>{{ module.moduleName }}</td>
+                <td class="text-end">
+                  <div class="actions">
+                    <button
+                      (click)="handleEdit(module)"
+                      class="btn btn-sm bg-success-light me-2"
+                    >
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button
+                      (click)="handleDelete(module)"
+                      class="btn btn-sm bg-danger-light"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,24 @@ import { NotificationsStudentComponent } from './notifications-student/notificat
 import { NotificationsHeaderComponent } from './notifications-header/notifications-header.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { GestionProfComponent } from './components/gestion/gestion-prof/gestion-prof.component';
+
+import { GestionProgramComponent } from './components/gestion/gestion-program/gestion-program.component';
+
+import { EditProgramComponent } from './components/edit/edit-program/edit-program.component';
+import { AddNewProgramComponent } from './components/add/add-new-program/add-new-program.component';
+import { EditProfComponent } from './components/edit/edit-prof/edit-prof.component';
+import { AddNewProfComponent } from './components/add/add-new-prof/add-new-prof.component';
+import { GestionClassComponent } from './components/gestion/gestion-class/gestion-class.component';
+import { EditClassComponent } from './components/edit/edit-class/edit-class.component';
+import { AddNewClassComponent } from './components/add/add-new-class/add-new-class.component';
+import { GestionModuleComponent } from './components/gestion/gestion-module/gestion-module.component';
+import { EditModuleComponent } from './components/edit/edit-module/edit-module.component';
+import { AddNewModuleComponent } from './components/add/add-new-module/add-new-module.component';
+import { GestionAdminComponent } from './components/gestion/gestion-admin/gestion-admin.component';
+import { EditAdminComponent } from './components/edit/edit-admin/edit-admin.component';
+import { AddNewAdminComponent } from './components/add/add-new-admin/add-new-admin.component';
+
 
 import { SemesterTableEditComponent  } from './components/semester-table-edit/semester-table-edit.component';
 import {ExamTableEditComponent} from "./components/exam-table-edit/exam-table-edit.component";
@@ -28,18 +46,9 @@ import {TimeTableEditComponent} from "./components/time-table-edit/time-table-ed
 
 const routes: Routes = [
   { path :'' , component: HomeComponent},
-  {
-    path: 'semesterTable',
-    component: SemesterTableComponent
-  },
-  {
-    path: 'examTable',
-    component: ExamTableComponent
-  },
-  {
-    path: 'timeTable',
-    component: TimeTableComponent
-  },
+  { path: 'semesterTable',component: SemesterTableComponent},
+  { path: 'examTable', component: ExamTableComponent},
+  { path: 'timeTable', component: TimeTableComponent},
   { path: 'demanderRattrapage', component: RequestFormComponent },
   { path: 'notificationsProfesseur', component: NotificationsProfComponent },
   { path: 'changerSeance', component: ProfModifierSeanceComponent },
@@ -47,6 +56,25 @@ const routes: Routes = [
   { path: 'historiqueAdmin', component: HistoriqueNotifsAdminComponent },
   { path: 'notificationsEtudiant', component: NotificationsStudentComponent },
   { path: 'notifications-header', component: NotificationsHeaderComponent },
+  { path :'home' , component: HomeComponent},
+  { path :'profs' , component: GestionProfComponent},
+  { path :'profs/edit' , component: EditProfComponent},
+  { path :'profs/add' , component: AddNewProfComponent},
+  { path :'programs' , component: GestionProgramComponent},
+  { path :'programs/edit' , component: EditProgramComponent},
+  { path :'programs/add' , component: AddNewProgramComponent},
+  { path :'classes' , component: GestionClassComponent},
+  { path :'classes/edit' , component: EditClassComponent},
+  { path :'classes/add' , component: AddNewClassComponent},
+  { path :'modules' , component: GestionModuleComponent},
+  { path :'modules/edit' , component: EditModuleComponent},
+  { path :'modules/add' , component: AddNewModuleComponent},
+  { path :'admins' , component: GestionAdminComponent},
+  { path :'admins/edit' , component: EditAdminComponent},
+  { path :'admins/add' , component: AddNewAdminComponent},
+
+ 
+  
 
   { path: 'semester-table-edit', component: SemesterTableEditComponent },
   { path: 'time-table-edit', component: TimeTableEditComponent },
