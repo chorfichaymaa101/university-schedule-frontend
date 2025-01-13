@@ -60,9 +60,22 @@ const routes: Routes = [
   { path: 'exam-table-edit', component: ExamTableEditComponent },
   { path :'home' , component: HomeComponent},
   { path :'profs' , component: GestionProfComponent},
+  { path :'profs/edit' , component: EditProfComponent},
+  { path :'profs/add' , component: AddNewProfComponent},
   { path :'programs' , component: GestionProgramComponent},
   /*
   { path :'programs/edit' , component: EditProgramComponent},
+  { path :'programs/add' , component: AddNewProgramComponent},
+  { path :'classes' , component: GestionClassComponent},
+  { path :'classes/edit' , component: EditClassComponent},
+  { path :'classes/add' , component: AddNewClassComponent},
+  { path :'modules' , component: GestionModuleComponent},
+  { path :'modules/edit' , component: EditModuleComponent},
+  { path :'modules/add' , component: AddNewModuleComponent},
+  { path :'admins' , component: GestionAdminComponent},
+  { path :'admins/edit' , component: EditAdminComponent},
+  { path :'admins/add' , component: AddNewAdminComponent},
+
  
   { path :'programs/add' , component: AddNewProgramComponent},
   { path :'classes' , component: GestionClassComponent},
