@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './components/widgets/not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SemesterTableEditComponent } from './components/semester-table-edit/semester-table-edit.component';
+
 import { ExamTableEditComponent } from './components/exam-table-edit/exam-table-edit.component';
 import { TimeTableEditComponent } from './components/time-table-edit/time-table-edit.component';
 import {MatButtonModule} from "@angular/material/button";
@@ -24,9 +25,14 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatTableModule} from "@angular/material/table";
-//import { ModifySemesterComponent } from './components/modify-semester/modify-semester.component';
-//import { ModifyTimeTableComponent } from './components/modify-time-table/modify-time-table.component';
-//import { ModifyExamComponent } from './components/modify-exam/modify-exam.component';
+
+import { EditProgramComponent } from './components/edit/edit-program/edit-program.component';
+import { GestionProgramComponent } from './components/gestion/gestion-program/gestion-program.component';
+import { GestionProfComponent } from './components/gestion/gestion-prof/gestion-prof.component';
+
+import { LoginComponent } from './components/widgets/login/login.component';
+import { SignupComponent } from './components/widgets/signup/signup.component';
+
 
 
 @NgModule({
@@ -36,11 +42,14 @@ import {MatTableModule} from "@angular/material/table";
     NavbarComponent,
     FooterComponent,
     //PageHeaderComponent,
-
+    EditProgramComponent,
     NotFoundComponent,
-
-
-
+    GestionProgramComponent,
+    GestionProfComponent,
+    LoginComponent,
+    SignupComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -60,6 +69,11 @@ import {MatTableModule} from "@angular/material/table";
     MatSelectModule,
     MatStepperModule,
     MatTableModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatInputModule,
+    MatFormFieldModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
