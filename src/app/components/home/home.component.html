@@ -1,29 +1,32 @@
 <ng-container>
     <div class="d-flex gap-3">
         <button id="b1">
-          <mat-icon></mat-icon>
-          <h2>Professeur</h2>
-          <h4>{{ currentCounts.professeurs }}</h4>
+            <div class="bb1">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <h2>Professeur</h2>
+            </div>
+            <h5>{{ currentCounts.professeurs }}</h5>
         </button>
       
         <button id="b2">
-          <mat-icon></mat-icon>
-          <h2>Etudiant</h2>
-          <h4>{{ currentCounts.etudiants }}</h4>
+            <div class="bb1">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h2>Etudiant</h2>
+            </div>
+            <h5>{{ currentCounts.etudiants }}</h5>
         </button>
       
         <button id="b3">
-          <mat-icon></mat-icon>
-          <h2>Cadre</h2>
-          <h4>{{ currentCounts.cadres }}</h4>
+            <div class="bb1">
+                <i class="fa-solid fa-user-tie"></i>
+                <h2>Cadre</h2>
+            </div>
+            <h5>{{ currentCounts.cadres }}</h5>
         </button>
-      </div>
+    </div>
       
     <div class="d-flex gap-3" id="home">
-        <img src="/assets/img/ensahome.png" alt="ENSA Home" style="width: 150%;height: 150%;justify-content: center;"/>
-        <img src="/assets/img/cartensa.png" alt="ENSA Home" style="width: 100%;height: 100%;justify-content: left;"/>
-
+        <img src="/assets/img/ensahome.png" alt="ENSA Home" style="width: 150%; height: 150%; justify-content: center;" />
+        <img src="/assets/img/cartensa.png" alt="ENSA Home" style="width: 100%; height: 100%; justify-content: left;" />
     </div>
 </ng-container>
-
-<ng-template #page></ng-template>

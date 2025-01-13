@@ -32,6 +32,17 @@ button:hover {
 h2{
     color: white;
 }
-h4{
+h5{
     color: white;
+}
+.bb1 {
+    display: flex; /* Utilise Flexbox pour aligner icône et texte horizontalement */
+   align-items: baseline; /* Centre verticalement */
+    gap: 10px; /* Ajoute de l'espace entre l'icône et le texte */
+    justify-content: center;
+}
+
+i {
+    font-size: 1.5rem; /* Ajuste la taille de l'icône */
+    color: white; /* Même couleur que le texte */
 }
