@@ -7,6 +7,11 @@
   .sidebar-menu a span.active {
     font-size: 18px; 
   }
-  #sidebar{
-    overflow-y: auto; 
+  #sidebar {
+    overflow-y: auto;
+    scrollbar-width: none; 
+  }
+  
+  #sidebar::-webkit-scrollbar {
+    display: none; 
   }
