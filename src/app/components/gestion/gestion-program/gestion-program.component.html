@@ -20,35 +20,15 @@
           >
             <thead class="student-thread">
               <tr>
-                <th>
-                  <div class="form-check check-tables">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value="something"
-                    />
-                  </div>
-                </th>
                 <th>Nom</th>
                 <th>Semester</th>
-                <th>Modules</th>
                 <th class="text-end">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let program of programs">
-                <td>
-                  <div class="form-check check-tables">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      value="something"
-                    />
-                  </div>
-                </td>
                 <td>{{ program.programName }}</td>
                 <td>{{ program.semester }}</td>
-                <td>TBD</td>
                 <td class="text-end">
                   <div class="actions">
                     <button
