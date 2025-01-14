@@ -22,7 +22,7 @@ export class ModuleServiceService {
         }
           
     public updateModule(id: number,Module: Module): Observable<HttpResponse<string>> {
-      return this.http.put<string>(environment.backendHost + this.url +id, Module, {
+      return this.http.put<string>(environment.backendHost + this.url + "/" +id, Module, {
         responseType: 'text' as 'json',
         observe: 'response' 
       });
@@ -30,12 +30,12 @@ export class ModuleServiceService {
       
       
     public getModule(id: number):Observable<Module>{
-      return this.http.get<Module>(environment.backendHost+this.url+id);
+      return this.http.get<Module>(environment.backendHost+this.url+ "/"+id);
     }
       
       
     public deleteModule(id: number): Observable<HttpResponse<string>> {
-      return this.http.delete<string>(environment.backendHost+this.url+ id, {
+      return this.http.delete<string>(environment.backendHost+this.url +"/"+ id, {
         responseType: 'text' as 'json',
         observe: 'response' 
       });
