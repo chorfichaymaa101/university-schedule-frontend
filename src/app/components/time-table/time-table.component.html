@@ -97,14 +97,7 @@ class="text-center my-5"
       <mat-icon>add</mat-icon>
       Créer un emploi du temps
     </button>
-    <button mat-raised-button
-    *ngIf="role === 'ADMIN'"
-    style="background-color: #084981; color: white;"
-      (click)="deleteTimetable()"
-    >
-      <mat-icon>delete</mat-icon>
-      Supprimer
-    </button>
+    
     <button mat-raised-button
     *ngIf="role === 'ADMIN'"
     style="background-color: #084981; color: white;"
