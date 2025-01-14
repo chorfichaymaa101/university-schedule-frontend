@@ -25,9 +25,9 @@ export class EditProfComponent implements OnInit {
   editProfFormGroup!: FormGroup;
   prof!: Profs;
 
-  programList: string[] = [];
+  programList: { programName: string; semester: string }[] = []; // Updated to an array of objects
 
-  selectedPrograms = new FormControl('', [Validators.required]);
+  selectedPrograms = new FormControl<string[]>([], [Validators.required]);
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   nameFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
@@ -43,8 +43,10 @@ export class EditProfComponent implements OnInit {
       this.programService.getPrograms().subscribe({
           next: (response) => {
             console.log(response);
-            this.programList = response.map((program: Program) => program.programName);
-          },
+            this.programList = response.map((program: Program) => ({
+              programName: program.programName,
+              semester: program.semester,
+            }));          },
           error: (err) => {
             console.error(err);
             Swal.fire('Erreur', 'Une erreur est survenue lors de l\'ajout du programme.', 'error');
@@ -67,14 +69,13 @@ export class EditProfComponent implements OnInit {
 
 
   setFormValues() {
+    console.log("g",this.prof);
     if (this.prof) {
       console.log("program prof :", this.prof.programNames)
       this.emailFormControl.setValue(this.prof.email);
       this.nameFormControl.setValue(this.prof.name);
-      //TODO : finish this 
-      for(const program in this.prof.programNames){
-        this.selectedPrograms.setValue(program);
-      }
+      this.selectedPrograms.setValue(this.prof.programNames); // Pre-select the programs
+
 
       this.editProfFormGroup.patchValue({
         name: this.prof.name,
@@ -85,7 +86,6 @@ export class EditProfComponent implements OnInit {
   }
 
   handleUpdateProf() {
-    console.log("t", this.selectedPrograms.value);
     this.editProfFormGroup.get('programNames')?.setValue(this.selectedPrograms.value);
     this.editProfFormGroup.get('email')?.setValue(this.emailFormControl.value);
     this.editProfFormGroup.get('name')?.setValue(this.nameFormControl.value);
@@ -97,6 +97,7 @@ export class EditProfComponent implements OnInit {
         ...this.editProfFormGroup.value
       };
 
+      console.log("t", updatedProf);
 
       console.log('Selected Values:', this.editProfFormGroup.get('programNames'));
       console.log('Selected nom:', this.editProfFormGroup.get('name'));
