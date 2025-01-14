@@ -117,12 +117,14 @@ export class ProfModifierSeanceComponent implements OnInit {
       console.log('Selected Module ID:', formData.moduleId);
       console.log('Selected Program ID:', formData.programId);
       console.log('Selected Semester ID:', formData.semesterId);
+      const semesterId = Number(formData.semesterId) - 1;
+
 
       const requestData = {
         professorId: this.userId,                
         moduleId: Number(formData.moduleId),            
         programId: Number(formData.programId), 
-        semesterId: Number(formData.semesterId),              
+        semesterId: semesterId,  
         oldTime: formData.oldTime,   
         endOldTime: formData.endOldTime,   
         oldDay: formData.oldDay,                          

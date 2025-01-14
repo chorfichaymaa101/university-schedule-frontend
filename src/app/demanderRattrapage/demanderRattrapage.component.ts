@@ -99,13 +99,15 @@ export class RequestFormComponent implements OnInit {
       console.log('Selected Module ID:', formData.moduleId);
       console.log('Selected Program ID:', formData.programId);
       console.log('Selected Semester ID:', formData.semesterId);
+      const semesterId = Number(formData.semesterId) - 1;
+
 
       const requestData = {
         professorId: this.userId,                
         moduleId: Number(formData.moduleId),            
         programId: Number(formData.programId),           
         sessionClassId: null,                           
-        semesterId: Number(formData.semesterId),         
+        semesterId: semesterId,         
         time: formData.time,                             
         endTime: formData.endTime,                             
         day: formData.day,                               
