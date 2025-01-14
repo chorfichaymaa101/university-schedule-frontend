@@ -49,8 +49,8 @@
               
                 <mat-label>Fillieres</mat-label>
                 <mat-select [formControl]="selectedPrograms" multiple>
-                  <mat-option *ngFor="let program of programList" [value]="program">
-                    {{ program }}
+                  <mat-option *ngFor="let program of programList" [value]="program.programName">
+                    {{ program.programName }} ({{ program.semester }})
                   </mat-option>
                 </mat-select>
               </mat-form-field>
