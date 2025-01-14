@@ -25,7 +25,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class AddNewProfComponent {
 
   programNames = new FormControl('');
-  programList: string[] = [];
+  programList: { programName: string; semester: string }[] = []; // Updated to an array of objects
+  semesterList: string[] = [];
 
   selectedPrograms = new FormControl('', [Validators.required]);
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -36,8 +37,8 @@ export class AddNewProfComponent {
   
   constructor(private fb: FormBuilder,private programService : ProgramServiceService,private profService : ProfServiceService, private router:Router) {}
 
-  ngOnInit(): void {
-    this.fetch();
+    async ngOnInit() {
+    await this.fetch();
     this.newProfFormGroup = this.fb.group({
       name: this.fb.control(null),
       email: this.fb.control(null),
@@ -49,7 +50,10 @@ export class AddNewProfComponent {
     this.programService.getPrograms().subscribe({
         next: (response) => {
           console.log(response);
-          this.programList = response.map((program: Program) => program.programName);
+          this.programList = response.map((program: Program) => ({
+            programName: program.programName,
+            semester: program.semester,
+          }));
         },
         error: (err) => {
           console.error(err);
