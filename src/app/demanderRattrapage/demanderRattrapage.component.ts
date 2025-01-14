@@ -48,7 +48,7 @@ export class RequestFormComponent implements OnInit {
   async ngOnInit() {
     await this.fetchModules(); // Wait for data before proceeding
     await this.fetchPrograms(); // Wait for data before proceeding
-    await this.fetchSemesters();
+    //await this.fetchSemesters();
 
 
     this.username = this.cookieService.get('username');
@@ -81,7 +81,7 @@ export class RequestFormComponent implements OnInit {
     }
   }
 
-  async fetchSemesters() {
+ /* async fetchSemesters() {
     try {
       const apiUrl = 'http://localhost:1000/api/semesters';
       const semesters = await this.http.get<Semester[]>(apiUrl).toPromise(); // Convert observable to promise
@@ -90,7 +90,8 @@ export class RequestFormComponent implements OnInit {
     } catch (error) {
       console.error('Error fetching semesters:', error);
     }
-  }
+  } */
+
   // Handle form submission
   onSubmit(form: NgForm) {
     if (form.valid) {

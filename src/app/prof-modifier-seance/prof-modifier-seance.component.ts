@@ -55,7 +55,7 @@ export class ProfModifierSeanceComponent implements OnInit {
   async ngOnInit() {
     await this.fetchModules(); 
     await this.fetchPrograms(); 
-    await this.fetchSemesters(); 
+    //await this.fetchSemesters(); 
     await this.fetchClasses(); 
 
     
@@ -87,7 +87,7 @@ export class ProfModifierSeanceComponent implements OnInit {
     }
   }
 
-  async fetchSemesters() {
+  /*async fetchSemesters() {
     try {
       const apiUrl = 'http://localhost:1000/api/semesters';
       const semesters = await this.http.get<Semester[]>(apiUrl).toPromise(); // Convert observable to promise
@@ -96,7 +96,7 @@ export class ProfModifierSeanceComponent implements OnInit {
     } catch (error) {
       console.error('Error fetching semesters:', error);
     }
-  }
+  }*/
 
   async fetchClasses() {
     try {

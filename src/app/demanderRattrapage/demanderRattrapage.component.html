@@ -13,7 +13,6 @@
       <img src="/assets/img/icons/calendrier.png" alt="Icon" class="header-icon" />
     </div>
     
-  
     <div class="info-container">
       <h3>Informations sur le Cours</h3>
       <div>
@@ -40,14 +39,13 @@
         <label for="semester">Semestre</label>
         <select class="mat-mdc-form-field-infix ng-tns-c926814666-1" id="semester" name="semesterId" ngModel required>
           <option value="" disabled selected>Choisir un Semestre</option>
-          <option *ngFor="let semester of semesters" [value]="semester.semesterId">
-            Semestre {{ semester.semesterId }}
+          <option *ngFor="let semester of [1, 2, 3, 4, 5, 6, 7, 8, 9]" [value]="semester">
+            Semestre {{ semester }}
           </option>
         </select>
       </div>
-    </div>
+    </div> <!-- Missing closing tag for info-container -->
   
-    <!-- Container for Other Information -->
     <div class="details-container">
       <h3>Détails de la séance</h3>
       <div>
@@ -76,6 +74,5 @@
   
     <button type="submit">Valider</button>
   </form>
-  
 </body>
 </html>
