@@ -47,6 +47,7 @@
             <div
               *ngIf="element[slot]"
               class="clickable-cell"
+              [ngClass]="{'selected': isCellSelected(element[slot], slot)}"
               (click)="onCellSelected(element[slot], slot)">
               {{ element[slot].moduleName }}<br>
               {{ element[slot].sessionType }}<br>
@@ -57,6 +58,7 @@
             <div
               *ngIf="!element[slot]"
               class="clickable-cell"
+              [ngClass]="{'selected': isCellSelected(null, slot)}"
               (click)="onCellSelected(null, slot)">
               <p>NS</p>
             </div>
