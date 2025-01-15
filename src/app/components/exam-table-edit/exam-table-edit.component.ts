@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,7 +7,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
+import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import { SemesterTable } from 'src/app/models/semester-table.model';
 import { SemesterTableService } from 'src/app/services/semester-table.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -274,6 +274,7 @@ export class ExamTableEditComponent{
     }
   }
 
+  @ViewChild('stepper') stepper!: MatStepper;
   updateSessionExamRow(): void {
     const updatedRow: SessionExam = {
       id: this.selectedRow?.id || 0,
@@ -293,6 +294,9 @@ export class ExamTableEditComponent{
       next: () => {
         console.log('Ligne modifiée');
         this.refreshData();
+
+        // Navigate back to second step
+        this.stepper.previous();
       },
       error: (err: HttpErrorResponse) => {
         console.error('Erreur lors de la modification de la ligne :', err);

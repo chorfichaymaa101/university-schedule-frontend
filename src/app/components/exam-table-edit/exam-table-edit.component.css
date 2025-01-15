@@ -19,8 +19,14 @@ h2{
   background-color: #e3f2fd;
 }
 
-.thData.active {
-  background-color: #e3f2fd; /* Light blue background */
-  border-color: #1976d2;     /* Blue border */
+.clickable-cell.selected {
+  background-color: #e3f2fd;
+  border-color: #1976d2;
+}
+
+/* If Material's styles are overriding, use this more specific selector */
+.mat-row.clickable-cell.selected {
+  background-color: #e3f2fd !important;
+  border-color: #1976d2 !important;
 }
 

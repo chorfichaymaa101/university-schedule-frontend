@@ -36,7 +36,8 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"
             (click)="onRowSelect(row)"
-            class="clickable-cell"
+            [class.selected]="selectedRow === row"
+            class="clickable-cell clickable-cell cursor-pointer hover:bg-gray-100"
         ></tr>
       </table>
     </div>

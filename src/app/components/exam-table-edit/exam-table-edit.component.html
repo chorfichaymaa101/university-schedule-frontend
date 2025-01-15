@@ -84,9 +84,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row
             *matRowDef="let row; columns: displayedColumns;"
-            class="clickable-cell"
-            (click)="onRowSelect(row)"
-            class="cursor-pointer hover:bg-gray-100">>
+            [class.selected]="selectedRow === row"
+            class="clickable-cell clickable-cell cursor-pointer hover:bg-gray-100"
+            (click)="onRowSelect(row)">
         </tr>
       </table>
     </div>
@@ -176,7 +176,7 @@
       <!-- In your third step, update the back button -->
       <div class="text-center mt-3">
         <button mat-raised-button class="m-2" matStepperPrevious (click)="refreshData()">Retour</button>
-        <button mat-raised-button color="primary" matStepperNext>Ajouter</button>
+        <button mat-raised-button color="primary" matStepperNext>Modifier</button>
       </div>
     </form>
   </mat-step>

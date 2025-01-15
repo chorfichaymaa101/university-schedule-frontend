@@ -1,24 +1,68 @@
-.scrollable-stepper{
+.scrollable-stepper {
   color: black;
 }
-#tdData{
+
+#tdData {
   text-align: center;
   font-size: 13px;
 }
 
-.thData{
+.thData {
   text-align: center;
   font-size: 19px;
   font-weight: bold;
 }
-
 .clickable-cell {
   cursor: pointer;
   padding: 8px;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+  min-height: 100px; /* Add a minimum height to make cells more visible */
 }
 
 .clickable-cell:hover {
   border-color: #1976d2;
-  background-color: #e3f2fd;
+  background-color: rgba(227, 242, 253, 0.5);
+}
+
+.clickable-cell.selected {
+  background-color: #e3f2fd !important;
+  border: 2px solid #1976d2 !important;
+  box-shadow: 0 0 4px rgba(25, 118, 210, 0.3);
+}
+
+/* Add this to ensure the selected state is visible even with Material's styles */
+.mat-cell .clickable-cell.selected {
+  background-color: #e3f2fd !important;
+  border-color: #1976d2 !important;
+}
+
+/* Add this to your time-table-edit.component.css file */
+
+/* Add these styles to your time-table-edit.component.css file */
+
+.error-snackbar {
+  background: #f44336;
+  color: white;
+}
+
+.error-snackbar .mat-simple-snackbar-action {
+  color: white;
+}
+
+/* Style to ensure snackbar appears above other elements */
+::ng-deep .error-snackbar {
+  margin-top: 70px !important; /* Adjust this value based on your header height */
+  z-index: 100000 !important;
+}
+
+/* Optional: Add a shake animation for the error message */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.error-snackbar {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }

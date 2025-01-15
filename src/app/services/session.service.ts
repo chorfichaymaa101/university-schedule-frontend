@@ -60,4 +60,36 @@ export class SessionService {
     public updateSession(session : Session): Observable<void>{
       return this.httpClient.put<void>(`${environment.backendHost}/updateSession`, session)
     }
+
+  checkClassAvailability(
+    classId: number,
+    day: string,
+    time: string,
+    currentSessionId: number
+  ): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${environment.backendHost}/sessions/check-class-availability`, {
+      params: {
+        classId: classId.toString(),
+        day,
+        time,
+        currentSessionId: currentSessionId.toString()
+      }
+    });
+  }
+
+  checkProfessorAvailability(
+    professorId: number,
+    day: string,
+    time: string,
+    currentSessionId: number
+  ): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${environment.backendHost}/sessions/check-professor-availability`, {
+      params: {
+        professorId: professorId.toString(),
+        day,
+        time,
+        currentSessionId: currentSessionId.toString()
+      }
+    });
+  }
 }
