@@ -106,6 +106,7 @@ export class TimeTableEditComponent {
   types: string[] = Object.keys(SessionType).filter(key => isNaN(Number(key)));
 
   selectedRow: any;  // Declare selectedRow property
+  selectedCell: CellSelection | null = null;
 
   //formulaire
   firstFormGroup = this._formBuilder.group({
@@ -352,6 +353,19 @@ export class TimeTableEditComponent {
 
   onCellSelected(cellData: any, column: string): void {
     console.log('Cell clicked:', cellData, 'Column:', column);
+
+    // If clicking the same cell, deselect it
+    if (this.selectedCell?.cellData === cellData && this.selectedCell?.slot === column) {
+      this.selectedCell = null;
+      return;
+    }
+
+    // Select the new cell
+    this.selectedCell = {
+      cellData: cellData,
+      slot: column
+    };
+
     if (cellData) {
       this.selectedRow = cellData;
       const typeIndex = this.types.findIndex(type => type === cellData.sessionType);
@@ -370,6 +384,21 @@ export class TimeTableEditComponent {
     }
   }
 
+  // Updated helper method with correct types
+  isCellSelected(element: any, slot: string): boolean {
+    return this.selectedCell?.cellData === element && this.selectedCell?.slot === slot;
+  }
+
+}
 
 
+
+
+
+
+
+
+interface CellSelection {
+  cellData: any;  // Replace 'any' with your specific type if available
+  slot: string;
 }
