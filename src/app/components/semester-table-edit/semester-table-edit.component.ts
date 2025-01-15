@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SemesterTable } from 'src/app/models/semester-table.model';
 import { SemesterTableService } from 'src/app/services/semester-table.service';
@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
+import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -99,7 +99,7 @@ export class SemesterTableEditComponent implements OnInit {
       });
     }
   }
-
+  @ViewChild('stepper') stepper!: MatStepper;
   // Update function
   updateSemesterRow(): void {
     if (this.selectedRow) {
@@ -113,7 +113,10 @@ export class SemesterTableEditComponent implements OnInit {
       this.semesterTableService.updateSemesterTable(updatedSemester).subscribe({
         next: () => {
           console.log('Mise à jour réussie');
-          this.getSemestertableByYear(this.academicYear);  // Refresh the data
+          this.getSemestertableByYear(this.academicYear); // Refresh the data
+
+          // Navigate back to second step
+          this.stepper.previous();
         },
         error: (err: HttpErrorResponse) => {
           console.error('Erreur de mise à jour :', err);
@@ -129,13 +132,4 @@ export class SemesterTableEditComponent implements OnInit {
     return utcDate.toISOString().split('T')[0];
   }
 
-  // Handle row selection for editing
-  //onRowSelect(row: SemesterTable): void {
-    //this.selectedRow = row;
-    //this.thirdFormGroup.patchValue({
-      //dateDebut: row.dateDebut,
-      //dateFin: row.dateFin,
-      //designation: row.designation,
-    //});
-  //}
 }
