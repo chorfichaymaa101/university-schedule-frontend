@@ -1,3 +1,13 @@
+.scrollable-stepper {
+  max-height: 100vh;
+  /* overflow-y: auto;*/
+  padding: 10px;
+
+}
+h2{
+  color: #084981;
+}
+
 .clickable-cell {
   cursor: pointer;
   padding: 8px;
@@ -8,3 +18,15 @@
   border-color: #1976d2;
   background-color: #e3f2fd;
 }
+
+.clickable-cell.selected {
+  background-color: #e3f2fd;
+  border-color: #1976d2;
+}
+
+/* If Material's styles are overriding, use this more specific selector */
+.mat-row.clickable-cell.selected {
+  background-color: #e3f2fd !important;
+  border-color: #1976d2 !important;
+}
+
