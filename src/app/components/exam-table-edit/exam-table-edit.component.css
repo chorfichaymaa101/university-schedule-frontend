@@ -1,32 +1,184 @@
-.scrollable-stepper {
-  max-height: 100vh;
-  /* overflow-y: auto;*/
-  padding: 10px;
+<h2>Calendrier d'examen</h2>
+<mat-stepper linear #stepper class="scrollable-stepper">
+  <!-- Step 1: Calendar Information -->
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup" (ngSubmit)="onYearSubmit()">
+      <ng-template matStepLabel>Information de Calendrier des Examens</ng-template>
+      <div class="text-center mt-3">
+        <!-- Academic Year Input -->
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Année universitaire</mat-label>
+          <input
+            matInput
+            placeholder="Année Universitaire"
+            formControlName="year"
+            required>
+        </mat-form-field><br>
 
-}
-h2{
-  color: #084981;
-}
+        <!-- Semester Input -->
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Semestre</mat-label>
+          <input
+            matInput
+            placeholder="Semestre"
+            formControlName="semester"
+            required>
+        </mat-form-field>
+      </div>
 
-.clickable-cell {
-  cursor: pointer;
-  padding: 8px;
-  border: 1px solid transparent;
-}
+      <!-- Navigation -->
+      <div class="text-center mt-3">
+        <button mat-raised-button color="primary" matStepperNext>
+          Continuer
+        </button>
+      </div>
+    </form>
+  </mat-step>
 
-.clickable-cell:hover {
-  border-color: #1976d2;
-  background-color: #e3f2fd;
-}
+  <!-- Step 2: Exam Schedule -->
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>Calendrier des Examens</ng-template>
 
-.clickable-cell.selected {
-  background-color: #e3f2fd;
-  border-color: #1976d2;
-}
+    <!-- Exam Schedule Table -->
+    <div class="text-center mt-3">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Professor Column -->
+        <ng-container matColumnDef="prof">
+          <th mat-header-cell *matHeaderCellDef>Professeur</th>
+          <td mat-cell *matCellDef="let element">{{element.professorName}}</td>
+        </ng-container>
 
-/* If Material's styles are overriding, use this more specific selector */
-.mat-row.clickable-cell.selected {
-  background-color: #e3f2fd !important;
-  border-color: #1976d2 !important;
-}
+        <!-- Program Column -->
+        <ng-container matColumnDef="program">
+          <th mat-header-cell *matHeaderCellDef>Filière</th>
+          <td mat-cell *matCellDef="let element">{{element.programName}}</td>
+        </ng-container>
 
+        <!-- Module Column -->
+        <ng-container matColumnDef="module">
+          <th mat-header-cell *matHeaderCellDef>Module</th>
+          <td mat-cell *matCellDef="let element">{{element.moduleName}}</td>
+        </ng-container>
+
+        <!-- Schedule Column -->
+        <ng-container matColumnDef="horaire">
+          <th mat-header-cell *matHeaderCellDef>Horaire</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.examPeriodDebut}} à {{element.examPeriodFin}}
+          </td>
+        </ng-container>
+
+        <!-- Classroom Column -->
+        <ng-container matColumnDef="classe">
+          <th mat-header-cell *matHeaderCellDef>Classe</th>
+          <td mat-cell *matCellDef="let element">{{element.className}}</td>
+        </ng-container>
+
+        <!-- Day Column -->
+        <ng-container matColumnDef="day">
+          <th mat-header-cell *matHeaderCellDef>Jour</th>
+          <td mat-cell *matCellDef="let element">{{element.day}}</td>
+        </ng-container>
+
+        <!-- Table Headers and Rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row
+            *matRowDef="let row; columns: displayedColumns;"
+            [class.selected]="selectedRow === row"
+            class="clickable-cell clickable-cell cursor-pointer hover:bg-gray-100"
+            (click)="onRowSelect(row)">
+        </tr>
+      </table>
+    </div>
+
+      <!-- Form Navigation -->
+    <form [formGroup]="secondFormGroup">
+      <div class="text-center mt-3">
+        <button mat-raised-button class="m-2" matStepperPrevious>Retour</button>
+        <button mat-raised-button color="primary" matStepperNext>Continuer</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Step 3: Exam update -->
+  <mat-step [stepControl]="thirdFormGroup">
+    <!-- Edit Form -->
+    <form [formGroup]="thirdFormGroup" (ngSubmit)="updateSessionExamRow()">
+      <ng-template matStepLabel>Modifier une ligne</ng-template>
+      <div class="text-center mt-3">
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Filière</mat-label>
+          <mat-select formControlName="prog" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let program of programs" [value]="program.id">
+              {{program.programName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Professeur</mat-label>
+          <mat-select formControlName="prof" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let person of persons" [value]="person.id">
+              {{person.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Module</mat-label>
+          <mat-select formControlName="module" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let module of modules" [value]="module.id">
+              {{module.moduleName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Jour</mat-label>
+          <input matInput [matDatepicker]="jour" formControlName="day" required>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="jour">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #jour></mat-datepicker>
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Heure de début</mat-label>
+          <input matInput type="time" formControlName="heureDebut">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Heure de fin</mat-label>
+          <input matInput type="time" formControlName="heureFin">
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Capacité</mat-label>
+          <input matInput formControlName="capacity" required />
+        </mat-form-field><br>
+
+        <mat-form-field appearance="outline" class="w-50 mb-3">
+          <mat-label>Classe</mat-label>
+          <mat-select formControlName="classe" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let classe of classes" [value]="classe.id">
+              {{classe.classname}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field><br>
+      </div>
+
+      <!-- In your third step, update the back button -->
+      <div class="text-center mt-3">
+        <button mat-raised-button class="m-2" matStepperPrevious (click)="refreshData()">Retour</button>
+        <button mat-raised-button color="primary" matStepperNext>Modifier</button>
+      </div>
+    </form>
+  </mat-step>
+
+</mat-stepper>
