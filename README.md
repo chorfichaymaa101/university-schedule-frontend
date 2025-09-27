@@ -55,7 +55,7 @@ src/
 
 Clone the repository
 
-git clone https://github.com/chorfichaymaa101/Gestions-des-emplois-du-temps-ENSA-FrontEnd.git
+git clone https://github.com/chorfichaymaa101/university-schedule-frontend-angular.git
 cd Gestions-des-emplois-du-temps-ENSA-FrontEnd
 
 
