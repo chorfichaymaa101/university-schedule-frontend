@@ -55,7 +55,7 @@ src/
 
 Clone the repository
 
-git clone https://github.com/<your-username>/Gestions-des-emplois-du-temps-ENSA-FrontEnd.git
+git clone https://github.com/chorfichaymaa101/Gestions-des-emplois-du-temps-ENSA-FrontEnd.git
 cd Gestions-des-emplois-du-temps-ENSA-FrontEnd
 
 
