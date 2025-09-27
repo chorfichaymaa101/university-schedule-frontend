@@ -1,4 +1,4 @@
-# Gestion des Emplois du Temps – FrontEnd
+# Gestion des Emplois du Temps – FrontEnd with Angular
 
 This is the **FrontEnd application** of the academic project **Gestion des Emplois du Temps** (Timetable Management System), developed with **Angular**.  
 It is designed for universities to manage and visualize class schedules for professors and students, with additional features such as notifications and session rescheduling (séances de rattrapage).
